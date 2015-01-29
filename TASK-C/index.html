@@ -111,14 +111,14 @@
         
 
         var city2Popup = "<b>"+city2Name+"</b><br>"
-                       +"<b>population</b>: "+city2Pop;
-//        
-//        if(city2Capitol == true) {
-//            city2Popup += "<br>Capitol of the Commonwealth of Kentucky";   
-//        }
-//        
-//        L.marker([city2Lat,city2Lon]).addTo(map)
-//            .bindPopup(city2Popup);
+                       +"<b>population</b>: "+city2Pop;        
+      
+        if(city2Capitol == true) {
+            city2Popup += "<br>Capitol of the Commonwealth of Kentucky";   
+      }
+        
+        L.marker([city2Lat,city2Lon]).addTo(map)
+            .bindPopup(city2Popup);
         
 
 //        var city3Popup = "<b>"+city3Name+"</b><br>"
