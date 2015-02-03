@@ -86,7 +86,6 @@
         map.addLayer(tiles);
         
         var cities = ["Lexington", "Frankfort", "Louisville"];
-            for(var i = 0; i < cities.length; i++)
         var cityCoords = [
             [38.0297, -84.5025],
             [38.1970, -84.8630],
@@ -95,9 +94,11 @@
         var cityPop = [308428, 27453, 756832];
         var cityCapitol = [false, true, false];
         
+        for (var i = 0; i < cities.legnth; i++); {
+            console.log(i);
+            console.log(cities[i]);    
             
             
-        
             var popup = "<b>"+cities[i]+"</b><br>"
                             +"<b>population</b>: "+cityPop[i];
 
