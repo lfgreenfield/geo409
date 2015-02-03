@@ -86,6 +86,11 @@
         map.addLayer(tiles);
         
         var cities = ["Lexington", "Frankfort", "Louisville"];
+        var cityCoords = [
+            [38.0297, -84.5025]
+            [38.1970, -84.8630]
+            [38.25, -85.7667]
+        ];
         
         
         // begin writing/editing Task D code here
@@ -94,9 +99,9 @@
         for(var i = 0; i < cities.length; i++) {
             console.log(i);
             console.log(cities[i]);
-            {
+        }
             
-            var popup = "<b>"+/* add code here */+"</b><br>"
+            var popup = "<b>"+cities[1]+"</b><br>"
                             +"<b>population</b>: "+/* add code here */;
 
             if(/* add code here */ == true) {
