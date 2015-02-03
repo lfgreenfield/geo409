@@ -96,17 +96,17 @@
         var cityCapitol = [false, true, false]; 
         
         var i = 0;
-       // while (i < cities.length){
+        while (i < cities.length){
             
-            var popUp = "<b>"+cities[0]+"</b><br>"
-                            +"<b>population</b>: "+cityPop[0]);
+            var popUp = "<b>"+cities[i]+"</b><br>"
+                            +"<b>population</b>: "+cityPop[i].toLocaleString();
 
-            if(cityCapitol[0] == true) {
+            if(cityCapitol[i] == true) {
                popUp += "<br>Capitol of the Commonwealth of Kentucky"; 
             } 
             
-            L.marker(cityCoords[0]).addTo(map)
-                .bindPopup(popUp[0]);
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popUp[i]);
         i++;
         }
         
