@@ -99,15 +99,15 @@
         var i = 0;
         while (i < cities.length){
             
-            var popUp = "<b>"+cities[i]+"</b><br>"
+            var Popup = "<b>"+cities[i]+"</b><br>"
                             +"<b>population</b>: "+cityPop[i];
 
             if(cityCapitol[i] == true) {
-               popUp += "<br>Capitol of the Commonwealth of Kentucky"; 
+               Popup += "<br>Capitol of the Commonwealth of Kentucky"; 
             } 
             
             L.marker(cityCoords[i]).addTo(map)
-                .bindPopup(popUp[i]);
+                .bindPopup(Popup[i]);
             i++;
         }
         
