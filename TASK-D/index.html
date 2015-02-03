@@ -102,12 +102,12 @@
                             +"<b>population</b>: "+cityPop[i];
 
             if(cityCapitol[i] == true) {
-               popUpp += "<br>Capitol of the Commonwealth of Kentucky"; 
+               popUp += "<br>Capitol of the Commonwealth of Kentucky"; 
             } 
             
             
             L.marker(cityCoords[i]).addTo(map)
-                .bindpopUp(popUpp[i]);
+                .bindPopup(popUp[i]);
             i++;
         }
         
