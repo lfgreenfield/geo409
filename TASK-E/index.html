@@ -88,10 +88,9 @@
         var frankArea = 14.6;
         var lvillArea = 1032;   
                
-        prepareData(lexArea, frankArea, lvillArea); // modify function call to pass 2 additional
-                              // arguments
+        prepareData(lexArea, frankArea, lvillArea); 
         
-        function prepareData(lexArea, frankArea, LvillArea) { /* include 2 more parameters here */
+        function prepareData(lexArea, frankArea, LvillArea) { 
             
             var cities = ["Lexington", "Frankfort", "Louisville"]; 
             var cityCoords = [ 
@@ -102,8 +101,8 @@
             var cityPops = [308428, 27453, 756832];             
             var cityAreas = [lexArea, frankArea, lvillArea];
                     
-            mapCities(cities, cityCoords, cityPops, cityAreas); // modify function call to pass 2 additional
-                                           // arguments
+            mapCities(cities, cityCoords, cityPops, cityAreas); 
+            
            }
             
         function mapCities(cities, cityCoords, cityPops, cityAreas) { /* include 2 more parameters here */
@@ -111,7 +110,7 @@
             var units = 'miles';
             
             for(var i = 0; i < cities.length; i++) {
-
+                
                 /*var density =  call a function named calcPopDensity here, passing
                                  the city population and area as arguments, and assign
                                  return value to the "density" variable */
