@@ -103,15 +103,12 @@
             var popup = "<b>"+cities[i]+"</b><br>"
                             +"<b>population</b>: "+cityPop[i];
 
-            if(cityCapitol == true) {
-               
-                popup += "<br>Capitol of the Commonwealth of Kentucky"; 
-                
+            if(cityCapitol[i] == true) {
+               popup += "<br>Capitol of the Commonwealth of Kentucky"; 
             } 
             
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);
-        }
         
         // end writing/editing Task D code here
         
