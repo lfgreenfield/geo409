@@ -87,6 +87,7 @@
         
     
         var cities = ["Lexington", "Frankfort", "Louisville"];      
+        
         var cityCoords = [
             [38.0297, -84.5025],
             [38.1970, -84.8630],
@@ -104,7 +105,6 @@
             if(cityCapitol[i] == true) {
                popUp += "<br>Capitol of the Commonwealth of Kentucky"; 
             } 
-            
             
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popUp[i]);
