@@ -44,9 +44,8 @@
             font-size: 1em;
             color: #001323;
         }
-        /* Additional style rules go here! */
         
-        .capitol{
+        .cityCapitol{
            fill: red;   
         }
 
@@ -55,8 +54,8 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>KY Snapshot</h1>
+        <h2>3 Cities</h2>
     </header>
 
     <div id='map'></div>
@@ -97,7 +96,7 @@
         var cityPop = [308428, 27453, 756832];        
         var cityCapitol = [false, true, false]; 
         
-       // var i = 0;
+        var i = 0;
         while (i < cities.length){
             
             var popUp = "<b>"+cities[i]+"</b><br>"
