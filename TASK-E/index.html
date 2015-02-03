@@ -111,6 +111,8 @@
             
             for(var i = 0; i < cities.length; i++) {
                 
+            calcPopDensity(cityPops, cityAreas);
+                return density
                 /*var density =  call a function named calcPopDensity here, passing
                                  the city population and area as arguments, and assign
                                  return value to the "density" variable */
@@ -124,7 +126,9 @@
             }
         }
         
-        // write a function named calcPopDensity which accepts two arguments from the caller, the  
+        function calcPopDensity
+            var density = cityPops/cityAreas
+       // write a function named calcPopDensity which accepts two arguments from the caller, the  
         // population and the area of a single city. The function should calculate the density
         // of the city with these two values and return the result to the caller 
         
