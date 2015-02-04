@@ -107,7 +107,7 @@
             
          function mapCities(cities, cityCoords, cityPops, cityAreas) { /* include 2 more parameters here */
             
-            var units = 'miles';
+            var units = 'liters';
             
             for(var i = 0; i < cities.length; i++) {
 
@@ -127,13 +127,12 @@
         }
         
         function calcPopDensity(cityPops, cityAreas, units) { 
-            var calculatedDensity = cityPops/cityAreas
-            
+            var density = cityPops/cityAreas;            
             
             if(units == "miles") {
-                console.log("units are miles");
+                return density; 
             } else {
-                console.log("units are not miles");
+                density*1.60934  
             }
             
     
