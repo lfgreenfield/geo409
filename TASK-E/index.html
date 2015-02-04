@@ -118,7 +118,7 @@
                                  //return value to the "density" variable */
 
                 var popup = "<b>"+cities[i]+"</b><br>"
-                                +"<b>Density</b>: "+density.toLocaleString()+" people per sq " + units;
+                                +"<b>Density</b>: "+Math.round(density).toLocaleString()+" people per sq. " + units;
 
                 L.marker(cityCoords[i]).addTo(map)
                     .bindPopup(popup);
