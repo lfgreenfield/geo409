@@ -111,9 +111,12 @@
             
             for(var i = 0; i < cities.length; i++) {
                 
-            calcPopDensity = (cityPops, cityAreas, units);
+            function calcPopDensity(cityPops, cityAraes){
+                var Density = cityPops/cityAreas;
                 return Density;
+            }
                 
+            
                 /*var density =  call a function named calcPopDensity here, passing
                                  the city population and area as arguments, and assign
                                  return value to the "density" variable */
