@@ -125,11 +125,15 @@
                     .bindPopup(popup);
                 
             }
-        }
-        
-        function calcPopDensity(cityPops, cityAreas){
+            
+            function calcPopDensity(cityPops, cityAreas){
             var Density = cityPops/cityAreas
+            console.log(Density);
+            
+            calcPopDensity(100,50);
             }
+            
+        }
        // write a function named calcPopDensity which accepts two arguments from the caller, the  
         // population and the area of a single city. The function should calculate the density
         // of the city with these two values and return the result to the caller 
