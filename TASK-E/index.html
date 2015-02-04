@@ -52,8 +52,8 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Major City Density</h1>
+        <h2>Kentucky</h2>
     </header>
 
     <div id='map'></div>
@@ -101,11 +101,11 @@
             var cityPops = [308428, 27453, 756832];             
             var cityAreas = [lexArea, frankArea, lvillArea];
             
-            mapCities(cities, cityCoords, cityPops, cityAreas) /* include 2 more parameters here */
+            mapCities(cities, cityCoords, cityPops, cityAreas) 
             
         }
             
-         function mapCities(cities, cityCoords, cityPops, cityAreas) { /* include 2 more parameters here */
+         function mapCities(cities, cityCoords, cityPops, cityAreas) { 
             
             var units = "miles";
             
@@ -113,10 +113,6 @@
 
                 var density =  calcPopDensity(cityPops[i], cityAreas[i], units);
                     
-                //call a function named calcPopDensity here, passing
-                                // the city population and area as arguments, and assign
-                                 //return value to the "density" variable */
-
                 var popup = "<b>"+cities[i]+"</b><br>"
                                 +"<b>Density</b>: "+Math.round(density).toLocaleString()+" people per sq. " + units;
 
