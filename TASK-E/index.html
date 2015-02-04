@@ -90,7 +90,7 @@
                
         prepareData(lexArea, frankArea, lvillArea); 
         
-        function prepareData(lexArea, frankArea, lvillArea) { 
+        function prepareData(lexArea, frankArea, lvillArea) {
             
             var cities = ["Lexington", "Frankfort", "Louisville"]; 
             var cityCoords = [ 
@@ -99,14 +99,11 @@
                 [38.25, -85.7667]
             ];
             var cityPops = [308428, 27453, 756832];             
-            var cityAreas = [lexArea, frankArea, lvillArea];
-                    
-            mapCities(cities, cityCoords, cityPops, cityAreas); 
+            var cityAreas = [lexArea, frankArea, lvillArea]
             
-           }
+        function mapCities(cities, cityCoords, cityPops, cityAreas) /* include 2 more parameters here */
             
-        function mapCities(cities, cityCoords, cityPops, cityAreas) { /* include 2 more parameters here */
-            
+        }
             var units = 'miles';
             
             for(var i = 0; i < cities.length; i++) {
@@ -138,7 +135,6 @@
                 
             }
             
-        }
        // write a function named calcPopDensity which accepts two arguments from the caller, the  
         // population and the area of a single city. The function should calculate the density
         // of the city with these two values and return the result to the caller 
