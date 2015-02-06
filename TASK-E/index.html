@@ -126,7 +126,7 @@
             if(units == "miles") {
                 return density; 
             } else {
-                density * 2.6;
+                density / 2.6; // since area is the denominator, you need to either calculate pop/(area*2.6) or pop/area/2.6
                 return density;
             }
             
