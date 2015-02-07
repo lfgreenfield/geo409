@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Module 07 Practice Template</title>
+    <title>Geo409 Task F Starter</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -45,6 +45,18 @@
             color: #001323;
         }
         /* Additional style rules go here! */
+        
+        .blue {
+            color: #165bb6;
+        }
+        .red {
+            color: #cc0000;
+        }
+        .purple {
+            color: #b6165b; 
+        }
+        
+
     </style>
 </head>
 
@@ -64,29 +76,36 @@
     </footer>
 
     <script>
-        
-        var myObject = {};
-            console.log(myObject);
-        
-        var map;
-        var targetDiv = 'map';
 
-        var options = {
-            center: [38.0489,-84.5025],
-            zoom: 13
-        }
-        map = L.map(targetDiv, options);
+        var map = L.map('map', {
+            center: [38.96,-85.36],
+            zoom: 8,
+        });
+       
         var tiles = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
             attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
             subdomains: '0123',
-            minZoom: 2,
-            maxZoom: 18
+            minZoom: 4,
+            maxZoom: 12
         });
         map.addLayer(tiles);
         
-        // continue JavaScript coding here!
+        // Begin writing/modifying code for Task F here
         
+        var cities = [
+             {
+                 name: "Louisville",
+                 properties: {
+                     coordinates: [38.25, -85.7667],
+                     population: 756832,
+                     state: "KY"
+                 }
+             }    
+        ];
+            
+        // End code for Task F
         
+          
     </script>
     
 </body>
