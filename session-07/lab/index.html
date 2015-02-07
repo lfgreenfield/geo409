@@ -80,6 +80,56 @@
         });
         map.addLayer(tiles);
         
+        var iguana = {
+            worldDom: true,
+            age: 8,
+            name: "Jack",
+            weight: 4.2,
+            length: 1.5,
+            calculateBMI: function(w,l) {
+                return w / (l*l);
+                }
+        }    
+        
+       var result = iguana.calculateBMI(4.2, 1.5);
+            console.log(result);
+        
+        iguana.greeting = "Hello, friend";
+        console.log(iguana.greeting);
+        
+        console.log(iguana);
+        console.log(iguana.name);
+        
+        if(iguana.worldDom == true){
+            console.log("This iguana esta loca");
+        }
+        
+        
+        
+        console.log(iguana["name"]);
+       
+        
+        
+        console.log(iguana.weight);
+        
+        iguana.weight = 8;
+        
+        console.log(iguana.weight);
+        
+        iguana.worldDom = false;
+        console.log(iguana.worldDom);
+        
+        console.log(iguana);
+        iguana.eyeColor = "green";
+        console.log(iguana);
+        
+        for (var key in iguana){
+            console.log(key);
+        }
+        
+        for (var key in iguana){
+            console.log(iguana[key]);
+        }
         // continue JavaScript coding here!
         
         
