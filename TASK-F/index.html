@@ -125,8 +125,13 @@
             //console.log(cities[i].properties.population);
             
             var props = cities[i].properties;
-                console.log(props);
-                console.log(props.state);
+                //console.log(props);
+                //console.log(props.state);
+            
+            var popup = "I am a temporary string value";
+            
+            l.marker(props.coordinates).addTo(map)
+                bind.Popup(popup);
            
         }
         
