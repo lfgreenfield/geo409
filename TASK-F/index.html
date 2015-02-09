@@ -128,8 +128,7 @@
                 //console.log(props);
                 //console.log(props.state);
             
-            var popup = "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                "<b>Population</b>: "+pop.toLocaleString()+"<div>";
+            var popup = "I am a temporary string value";
             
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
@@ -138,7 +137,7 @@
            
         }
         
-        function buildPopup(name, population, state){
+        function buildPopup(name, props.population, props.state){
             
            
             if (state == "KY") {
