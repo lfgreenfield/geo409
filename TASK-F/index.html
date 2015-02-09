@@ -128,16 +128,13 @@
                 //console.log(props);
                 //console.log(props.state);
             
-            var colorClass = ["blue", "red", "purple"];
+            var name = cities[i].name;
             
-            var popup = "<div class='"+colorClass+"'><b>"+name[i]+"</b><br>"+
-                "<b>Population</b>: "+props.population.toLocaleString()+"<div>";
+            var popup = buildPopup(name, props.population, props.state);
             
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
             
-            buildPopup(name, props.population, props.state)
-           
         }
         
         function buildPopup(name, population, state){
@@ -153,7 +150,8 @@
                 var colorClass = "purple";
             }
             
-            return popup;
+            return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                "<b>Population</b>: "+props.population.toLocaleString()+"<div>";
                 
         }
             
