@@ -138,6 +138,7 @@
         }
         
         function buildPopup(name, props.population, props.state){
+            
            
             if (state == "KY") {
                 var colorClass = "blue";
@@ -145,9 +146,12 @@
             else if (state == "IN") {
                 var colorClass = "red";
             }
-            else {
+            else if (state == "OH") {
                 var colorClass = "purple";
             }
+            
+            return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                "<b>Population</b>: "+pop.toLocaleString()+"<div>";
                 
         }
             
