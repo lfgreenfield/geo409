@@ -128,7 +128,8 @@
                 //console.log(props);
                 //console.log(props.state);
             
-            var popup = "I am a temporary string value";
+            var popup = "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                "<b>Population</b>: "+population.toLocaleString()+"<div>";
             
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
