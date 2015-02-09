@@ -128,8 +128,10 @@
                 //console.log(props);
                 //console.log(props.state);
             
+            var colorClass = ["blue", "red", "purple"];
+            
             var popup = "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                "<b>Population</b>: "+population.toLocaleString()+"<div>";
+                "<b>Population</b>: "+props.population.toLocaleString()+"<div>";
             
             L.marker(props.coordinates).addTo(map)
                 .bindPopup(popup);
