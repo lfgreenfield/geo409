@@ -71,12 +71,22 @@
         center: [40,-94],
         zoom: 4
     });
+        
+     var OpenStreetMap_HOT = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        minZoom: 4,
+        maxZoom: 12
+    });    
+        
+    map.addLayer(OpenStreetMap_HOT);     
                 
     var redIguana = L.latLng(40.7718,-111.9124);
         
     map.on('click', function(e){
         console.log(e.latlng);   
     });
+        
+ 
                   
     </script>
     
