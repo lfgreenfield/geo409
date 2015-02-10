@@ -84,16 +84,22 @@
         
     map.on('click', function(e){
             
-        console.log(e.latlng);
+            console.log(e.latlng);
         
         var clickPoint = e.latlng;
         var distance = clickPoint.distanceTo(redIguana);
             
-        console.log(distance);
+            console.log(distance);
         
-        var clickZoom = map.setView(e.latlng, 8);
+       map.setView(e.latlng, 8);
+         
+        var clickSW = map.getBounds().getSouthWest();
         
-        console.log(clickZoom);
+            console.log(clickSW.lat, clickSW.lng);
+        
+        var distSW = clickSW.distanceTo(redIguana);
+        
+            console.log(distSW);
         
     });
         
