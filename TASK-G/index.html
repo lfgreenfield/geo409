@@ -84,9 +84,10 @@
         
     map.on('click', function(e){
         //console.log(e.latlng);
-        var main = L.latLng(38.0489,-96.5025);
-        var otherCity = L.latLng(38.1489,-96.5125);
-        mapCenter.distanceTo(otherCity);
+        var clickPoint = L.latLng(e);
+        var redIguana = L.latLng(40.7718, -111.9124);
+        
+        console.log(e.clickPoint.distanceTo(redIguana));
     });
         
  
