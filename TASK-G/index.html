@@ -79,13 +79,7 @@
         
     map.addLayer(OpenStreetMap_HOT);     
                 
-    var redIguana = L.latLng(40.7718,-111.9124);
-        
-    var redIguanaMarker = [
-        {
-            name: "The Red Iguana Waffle Emporium",
-            coordinates: [40.7718, -111.9124]
-        }];    
+    var redIguana = L.latLng(40.7718,-111.9124);   
         
     map.on('click', function(e){
             
@@ -108,12 +102,13 @@
         
     });
         
-        var popup = buildPopup(redIguanaMarker.name);
+        var popup = "The Red Iguana Ice Cream Shack";
         
-        function buildPopup(
+        var icon = L.icon({
+            iconColor = 
+        });
         
-        L.marker(redIguanaMarker.coordinates).addTo(map)
-        .bindPopup(popup);
+        L.marker([40.7718, -111.9124]).addTo(map).bindPopup(popup);
                   
     </script>
     
