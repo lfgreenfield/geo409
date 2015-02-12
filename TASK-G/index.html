@@ -81,6 +81,12 @@
                 
     var redIguana = L.latLng(40.7718,-111.9124);
         
+    var redIguanaMarker = [
+        {
+            name: "The Red Iguana Waffle Emporium",
+            coordinates: [40.7718, -111.9124]
+        }];    
+        
     map.on('click', function(e){
             
             console.log(e.latlng);
@@ -102,7 +108,12 @@
         
     });
         
- 
+        var popup = buildPopup(redIguanaMarker.name);
+        
+        function buildPopup(
+        
+        L.marker(redIguanaMarker.coordinates).addTo(map)
+        .bindPopup(popup);
                   
     </script>
     
