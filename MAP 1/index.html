@@ -72,13 +72,19 @@
         zoom: 4
     });
         
-    var Esri_DeLorme = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Specialty/Delorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {           
-	   attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme',
-	   minZoom: 4,
-	   maxZoom: 12
-});    
+    var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 1,
+        maxZoom: 12,
+});
         
-    map.addLayer(Esri_DeLorme); 
+//        var Esri_DeLorme = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Specialty/Delorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {           
+//	   attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme',
+//	   minZoom: 4,
+//	   maxZoom: 12
+//});    
+        
+    map.addLayer(OpenStreetMap_BlackAndWhite); 
         
         var iguanaZones = [
             {
