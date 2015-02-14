@@ -67,7 +67,16 @@
 
     <script>
 
- // Step 1 and 2 here
+    var map = L.map('map', {
+        center: [37.8136, 144.9631],
+        zoom: 4
+    });
+        
+    var Esri_DeLorme = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme',
+	minZoom: 4,
+	maxZoom: 12
+});    
         
         var iguanaZones = [
             {
