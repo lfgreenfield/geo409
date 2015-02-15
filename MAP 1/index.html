@@ -170,8 +170,8 @@
         ]; // end iguanaShips data
         
              
-   var testCircle = L.circle([-37.854506, 144.797431], 1850);
-        testCircle.addTo(map);
+//   var testCircle = L.circle([-37.854506, 144.797431], 1850);
+//        testCircle.addTo(map);
         
     var defaultCircle = {
         color: '#03f',
@@ -183,9 +183,27 @@
         fillColor: 'red'
     };
         
-    var groupIguanaZones = L.layerGroup();    
+    for(var i = 0; i < iguanaZones.length; i ++) {
         
+        var coords = iguanaZones[i].coordinates;
+        var radius = iguanaZones[i].properties.size;
         
+        L.circle([coords], radius).addTo(map);
+    }
+        
+//    
+//     for(var i = 0; i < cities.length; i++){
+////console.log(cities[i]);
+////console.log(cities[i].properties.population);
+//var props = cities[i].properties;
+////console.log(props);
+////console.log(props.state);
+//var name = cities[i].name;
+//var popup = buildPopup(name, props.population, props.state);
+//L.marker(props.coordinates).addTo(map)
+//.bindPopup(popup);
+        
+
 //      steps 3 here
 //      steps 4-6  here
             
