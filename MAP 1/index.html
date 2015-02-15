@@ -203,12 +203,15 @@
                 map.removeLayer(marker);
             };
 
-            L.marker(e.latlng); 
+            L.marker(e.latlng, 
+                draggable: true
+                    );
                 console.log(e.latlng);
             L.marker(e.latlng).addTo(map);
+            
 //              step eight here
             
-        });  // keep this code
+        }); 
         
         function testDistance() {
             
