@@ -199,14 +199,13 @@
        
         map.on('click', function(e) {  // keep this code
        
-            if(map.hasLayer(marker)) {               
-                map.removeLayer(marker);
+            if(map.hasLayer(e.latlng)) {               
+                map.removeLayer(e.latlng);
             };
 
-            L.marker(e.latlng, 
-                draggable: true
-                    );
+            L.marker(e.latlng);
                 console.log(e.latlng);
+            
             L.marker(e.latlng).addTo(map);
             
 //              step eight here
