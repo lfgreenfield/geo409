@@ -197,26 +197,28 @@
             
         var marker;  // keep this code
        
-        map.on('click', function(e) {  // keep this code
-
-            L.marker(e.latlng);
-                console.log(e.latlng);
-            
-            L.marker(e.latlng).addTo(map);
-            
-            var clickPoint = e.latlng;
+        map.on('click', function(e) { 
             
             if(map.hasLayer(marker)) {               
                 map.removeLayer(marker)
             };
+
+            var clickPoint = e.latlng;
+            
+            L.marker(clickPoint);
+                console.log(clickPoint);
+            
+            L.marker(clickPoint).addTo(map);
+            
             
 //              step eight here
             
         }); 
         
-        function testDistance() {
+        function testDistance() {  
             
-            iguanaGroup.eachLayer(function(layer) {
+           circleGroup.eachLayer(function(layer) {
+               layer.distanceTo(clickPoint);
 //              step 9 here
 //              step 10 here
             });
