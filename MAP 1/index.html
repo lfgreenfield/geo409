@@ -183,15 +183,18 @@
         fillColor: 'red'
     };
         
-    for(var i = 0; i < iguanaZones.length; i ++) {
+    for(var i = 0; i < iguanaZones.length; i++) {
         
         var coords = iguanaZones[i].coordinates;
+            console.log(iguanaZones[i]);
         var radius = iguanaZones[i].properties.size;
         
-        L.circle([coords], radius).addTo(map);
-    }
+        L.circle(coords, radius).addTo(map);
         
-//    
+        
+    };
+        
+    
 //     for(var i = 0; i < cities.length; i++){
 ////console.log(cities[i]);
 ////console.log(cities[i].properties.population);
