@@ -188,11 +188,12 @@
             //console.log(iguanaZones[i]);
         var radius = iguanaZones[i].properties.size;
         
-        L.circle(coords, radius).addTo(map).addTo(circleGroup);
-            console.log(circleGroup);
+        L.circle(coords, radius).addTo(circleGroup);
+            //console.log(circleGroup);
             
     };
         
+    circleGroup.addTo(map);  
 
 
 //      steps 3 here
