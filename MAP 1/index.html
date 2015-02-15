@@ -194,10 +194,6 @@
     };
         
     circleGroup.addTo(map);  
-
-
-//      steps 3 here
-//      steps 4-6  here
             
         var marker;  // keep this code
        
@@ -208,7 +204,9 @@
 //                map.removeLayer(marker);
 //            }
 
-//              step seven here            
+            L.marker(e.latlng); 
+                console.log(e.latlng);
+            L.marker(e.latlng).addTo(map);
 //              step eight here
             
         });  // keep this code
