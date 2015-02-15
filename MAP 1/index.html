@@ -198,15 +198,17 @@
         var marker;  // keep this code
        
         map.on('click', function(e) {  // keep this code
-       
-            if(map.hasLayer(e.latlng)) {               
-                map.removeLayer(e.latlng);
-            };
 
             L.marker(e.latlng);
                 console.log(e.latlng);
             
             L.marker(e.latlng).addTo(map);
+            
+            var clickPoint = e.latlng;
+            
+            if(map.hasLayer(marker)) {               
+                map.removeLayer(marker)
+            };
             
 //              step eight here
             
