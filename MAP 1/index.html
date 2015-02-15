@@ -180,7 +180,7 @@
         fillColor: 'red'
     };
         
-    L.layerGroup();
+    var circleGroup = L.layerGroup();
         
     for(var i = 0; i < iguanaZones.length; i++) {
         
@@ -188,7 +188,8 @@
             //console.log(iguanaZones[i]);
         var radius = iguanaZones[i].properties.size;
         
-        L.circle(coords, radius).addTo(map)
+        L.circle(coords, radius).addTo(map).addTo(circleGroup);
+            console.log(circleGroup);
             
     };
         
