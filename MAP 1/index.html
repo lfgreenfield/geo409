@@ -198,11 +198,10 @@
         var marker;  // keep this code
        
         map.on('click', function(e) {  // keep this code
-
-// uncomment this code after step seven is finished          
-//            if(map.hasLayer(marker)) {               
-//                map.removeLayer(marker);
-//            }
+       
+            if(map.hasLayer(marker)) {               
+                map.removeLayer(marker);
+            };
 
             L.marker(e.latlng); 
                 console.log(e.latlng);
