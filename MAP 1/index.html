@@ -195,14 +195,14 @@
         
     circleGroup.addTo(map);  
             
-        var marker = e.latlng;  // keep this code
+        var marker;  // keep this code
        
-        map.on('click', function(e) { 
-            
+        map.on('click', function(e){ 
+
             if(map.hasLayer(marker)) {               
                 map.removeLayer(marker)
             };
-
+            
             var clickPoint = e.latlng;
             
             L.marker(clickPoint);
@@ -210,22 +210,27 @@
             
             L.marker(clickPoint).addTo(map);
             
-            return 
+           
+          //testDistance(e.latlng);  
+           
 //              step eight here
             
         }); 
         
-        function testDistance() {  
-            
-            circleGroup.eachLayer(function(layer) {
-               layer.distanceTo(clickPoint);
-               
-            var dangerZone = getRadius       
-                    
-//              step 9 here
-//              step 10 here
-            });
-        }
+//        function testDistance(marker) {  
+//             
+//            var distance = layer.distanceTo(e.latlng);
+//            
+//            circleGroup.eachLayer(function(layer) {
+//                layer.distanceTo(e.latlng);
+//                
+//               
+//            var dangerZone = getRadius       
+//                    
+////              step 9 here
+////              step 10 here
+//            });
+// }
         
 // end map1 code
         
