@@ -217,9 +217,14 @@
             
         }); 
         
-       function testDistance(marker) {  
+       function testDistance(clickPoint) {  
             
-            circleGroup.eachLayer(function(layer) {           
+            circleGroup.eachLayer(function(layer) { 
+                
+                var radius = size;
+                var distance = radius.distanceTo(clickPoint);
+                
+                    console.log(distance);
                     
 //              step 9 here
 //              step 10 here
