@@ -195,7 +195,9 @@
         
     circleGroup.addTo(map);  
             
-        var marker;  // keep this code
+        var marker;    // keep this code
+        
+        var dragMarker;
        
         map.on('click', function(e){ 
 
@@ -208,12 +210,19 @@
             L.marker(clickPoint);
                 //console.log(clickPoint);
             
-            marker = L.marker((clickPoint).addTo(map){
-                draggable: true;
-            });
+            marker = L.marker(clickPoint).addTo(map);
             
+            var dangerOptions = {
+                draggable: true
+            };
+            
+            var safeOptions = {
+                draggable: false
+            };
+            
+            dragMarker = L.marker(clickPoint, dangerOptions).addTo(map);
            
-        testDistance(e.latlng);  
+        testDistance(clickPoint);  
            
 //              step eight here
             
@@ -232,11 +241,14 @@
                 var realDistance = (firstDistance - radius);
                     //console.log(realDistance);
                 
+                
                 if(realDistance < 2200) {
                     layer.setStyle(highlightCircle);
+                    return dragMarker;
                 }
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
+                    return marker;
                 };
 //                
 //                var test = (10 - 5);   TESTING SUBTRACTION
