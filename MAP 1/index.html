@@ -209,7 +209,6 @@
                 //console.log(clickPoint);
             
             marker = L.marker(clickPoint).addTo(map);
-
            
         testDistance(clickPoint);   
            
@@ -231,9 +230,9 @@
                     //console.log(realDistance);
                 
                 
-                if(realDistance < 2200) {
+                if(realDistance < 2200) { 
                     layer.setStyle(highlightCircle);
-                }
+                }                   
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
                 };
