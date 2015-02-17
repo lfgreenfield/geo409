@@ -203,12 +203,12 @@
                 map.removeLayer(marker)
             };
             
-            var clickPoint = e.latlng;
+            var marker = e.latlng;
             
-            L.marker(clickPoint);
-                //console.log(clickPoint);
+            L.marker(marker);
+                console.log(marker);
             
-            L.marker(clickPoint).addTo(map);
+            L.marker(marker).addTo(map);
             
            
         testDistance(e.latlng);  
@@ -221,10 +221,11 @@
             
             circleGroup.eachLayer(function(layer) { 
                 
-                var radius = size;
-                var distance = radius.distanceTo(clickPoint);
+                //getRadius(layer);
                 
-                    console.log(distance);
+              
+                
+            
                     
 //              step 9 here
 //              step 10 here
