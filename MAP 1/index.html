@@ -208,7 +208,9 @@
             L.marker(clickPoint);
                 //console.log(clickPoint);
             
-            marker = L.marker(clickPoint).addTo(map);
+            marker = L.marker((clickPoint).addTo(map){
+                draggable: true;
+            });
             
            
         testDistance(e.latlng);  
