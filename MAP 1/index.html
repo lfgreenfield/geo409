@@ -195,11 +195,9 @@
         
     circleGroup.addTo(map);  
             
-        var marker;// keep this code
-        
-        var options = {
+        var marker = {
             safeDistance: true
-        };
+        };       // keep this code
         
         map.on('click', function(e){
             
@@ -208,7 +206,7 @@
 //            }
             //marker.safeDistance = true;
             
-            if(options.safeDistance == false) {
+            if(marker.safeDistance == false) {
                 map.removeLayer(marker)
             };
             
@@ -217,7 +215,8 @@
             L.marker(clickPoint);
                 //console.log(clickPoint);
             
-            marker = L.marker(clickPoint, options).addTo(map);
+            marker = L.marker(clickPoint).addTo(map);
+            marker.safeDistance = true;
             
         testDistance(clickPoint);   
            
@@ -241,7 +240,7 @@
                 
                 if(realDistance < 2200) { 
                     layer.setStyle(highlightCircle);
-                    return options.safeDistance = false;
+                    return marker.safeDistance = false;
                 }                   
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
