@@ -197,12 +197,17 @@
             
         var marker;  // keep this code
        
-        map.on('click', function(e){ 
+        map.on('click', function(e){
             
-            var dangerZone = (
                 if(map.hasLayer(marker)) {               
                 map.removeLayer(marker)
-            });
+            };
+
+
+            if(map.hasLayer(marker)) {               
+                map.removeLayer(marker)
+            };
+
             
             var clickPoint = e.latlng;
             
@@ -234,7 +239,6 @@
                 
                 if(realDistance < 2200) {
                     layer.setStyle(highlightCircle);
-                    return dangerZone;
                 }
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
@@ -243,9 +247,6 @@
 //                var test = (10 - 5);   TESTING SUBTRACTION
 //                console.log(test);
 
-                    
-//              step 9 here
-//              step 10 here
             });
        }
         
