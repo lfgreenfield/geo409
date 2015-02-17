@@ -204,7 +204,7 @@
 //            }
             //marker.safeDistance = true;
             
-            if(marker.safeDistance == false) {
+            if(marker.safeDistance == 'false') {
                 map.removeLayer(marker)
             };
             
@@ -214,6 +214,8 @@
                 //console.log(clickPoint);
             
             marker = L.marker(clickPoint).addTo(map);
+            
+            marker.safeDistance = 'true';
             
         testDistance(clickPoint);   
            
@@ -237,7 +239,7 @@
                 
                 if(realDistance < 2200) { 
                     layer.setStyle(highlightCircle);
-                    return marker.safeDistance = false;
+                    return marker.safeDistance = 'false';
                 }                   
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
