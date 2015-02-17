@@ -201,11 +201,6 @@
         
         map.on('click', function(e){
             
-//            if(map.hasLayer(marker)) {               
-//                map.removeLayer(marker)
-//            }
-            //marker.safeDistance = true;
-            
             if(marker.safeDistance == false) {
                 map.removeLayer(marker)
             };
@@ -219,8 +214,6 @@
             marker.safeDistance = true;
             
         testDistance(clickPoint);   
-           
-//              step eight here
             
         }); 
         
