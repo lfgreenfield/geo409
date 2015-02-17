@@ -224,7 +224,7 @@
                 var radius = layer.getRadius();
                     //console.log(radius);
                 var center = layer.getLatLng();
-                    console.log(center);
+                    //console.log(center);
                 var firstDistance = center.distanceTo(clickPoint);
                     //console.log(firstDistance);
                 var realDistance = (firstDistance - radius);
@@ -234,7 +234,7 @@
                     layer.setStyle(highlightCircle);
                 }
                 else if (realDistance > 2200) {
-            
+                    layer.setStyle(defaultCircle);
                 };
 //                
 //                var test = (10 - 5);   TESTING SUBTRACTION
