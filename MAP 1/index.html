@@ -202,8 +202,10 @@
 //            if(map.hasLayer(marker)) {               
 //                map.removeLayer(marker)
 //            }
-            if(map.hasLayer(marker.safeDistance == false)) {
-                map.removeLayer(marker.safeDistance == false)
+            //marker.safeDistance = true;
+            
+            if(marker.safeDistance == false) {
+                map.removeLayer(marker)
             };
             
             var clickPoint = e.latlng;
@@ -212,8 +214,7 @@
                 //console.log(clickPoint);
             
             marker = L.marker(clickPoint).addTo(map);
-            marker.safeDistance = true;
-           
+            
         testDistance(clickPoint);   
            
 //              step eight here
