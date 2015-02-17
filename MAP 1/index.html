@@ -180,9 +180,9 @@
         fillColor: 'red'
     };
         
-    var flagIcon = L.icon({
-        iconUrl: 'http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_icon_green_4.svg/85px-Flag_icon_green_4.svg.png',
-        iconSize: [38, 100]
+    var starIcon = L.icon({
+        iconUrl: 'http://simpleicon.com/wp-content/uploads/star.png',
+        iconSize: [25, 25]
     });
         
     var circleGroup = L.layerGroup();
@@ -215,7 +215,7 @@
             L.marker(clickPoint);
                 //console.log(clickPoint);
             
-            marker = L.marker((clickPoint), {icon: flagIcon}).addTo(map);
+            marker = L.marker((clickPoint), {icon: starIcon}).addTo(map);
             marker.safeDistance = true;
             
         testDistance(clickPoint);   
