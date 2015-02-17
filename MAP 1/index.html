@@ -198,11 +198,12 @@
         var marker;  // keep this code
        
         map.on('click', function(e){ 
-
-//            if(map.hasLayer(marker)) {               
-//                map.removeLayer(marker)
-//            };
-//            
+            
+            var dangerZone = (
+                if(map.hasLayer(marker)) {               
+                map.removeLayer(marker)
+            });
+            
             var clickPoint = e.latlng;
             
             L.marker(clickPoint);
@@ -233,7 +234,7 @@
                 
                 if(realDistance < 2200) {
                     layer.setStyle(highlightCircle);
-                    map.removeLayer(marker);
+                    return dangerZone;
                 }
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
