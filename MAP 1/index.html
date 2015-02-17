@@ -203,9 +203,9 @@
             
             deleteMarker = map.removeLayer(marker);
             
-//            if(map.hasLayer(marker)) {               
-//                map.removeLayer(marker)
-//            };
+            if(map.hasLayer(deleteMarker)) {               
+                map.removeLayer(deleteMarker)
+            };
             
             var clickPoint = e.latlng;
             
