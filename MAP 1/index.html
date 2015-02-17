@@ -195,13 +195,16 @@
         
     circleGroup.addTo(map);  
             
-        var marker;  // keep this code
+        var marker; // keep this code
        
+        var dangerMarker;
+        
         map.on('click', function(e){ 
 
-            if(map.hasLayer(marker)) {               
-                map.removeLayer(marker)
+            if(map.hasLayer(dangerMarker)) {               
+                map.removeLayer(dangerMarker)
             };
+            
             
             var clickPoint = e.latlng;
             
@@ -209,6 +212,8 @@
                 //console.log(clickPoint);
             
             marker = L.marker(clickPoint).addTo(map);
+            
+            dangerMarker = L.marker(clickPoint).addTo(map);
 
            
         testDistance(clickPoint);  
@@ -233,6 +238,7 @@
                 
                 if(realDistance < 2200) {
                     layer.setStyle(highlightCircle);
+                    return dangerMarker;
                 }
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
