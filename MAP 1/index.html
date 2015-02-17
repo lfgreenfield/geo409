@@ -222,20 +222,23 @@
             circleGroup.eachLayer(function(layer) { 
                 
                 var radius = layer.getRadius();
-                
                     //console.log(radius);
-                
                 var center = layer.getLatLng();
-                
                     console.log(center);
-                
                 var firstDistance = center.distanceTo(clickPoint);
+                    //console.log(firstDistance);
+                var realDistance = (firstDistance - radius);
+                    //console.log(realDistance);
                 
-                var realDistance = subtract(firstDistance, radius);
-                
-                
-                
-                
+                if(realDistance < 2200) {
+                    var dangerZone = layer.getStyle(highlightCircle);
+                }
+                else if (realDistance > 2200) {
+                    var defaultCircle;
+                };
+//                
+//                var test = (10 - 5);   TESTING SUBTRACTION
+//                console.log(test);
 
                     
 //              step 9 here
