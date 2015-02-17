@@ -197,11 +197,7 @@
             
         var marker; // keep this code
         
-        var deleteMarker;
-        
         map.on('click', function(e){
-            
-            deleteMarker = map.removeLayer(marker);
             
 //            if(map.hasLayer(marker)) {               
 //                map.removeLayer(marker)
@@ -236,7 +232,6 @@
                 
                 if(realDistance < 2200) { 
                     layer.setStyle(highlightCircle);
-                    return deleteMarker;
                 }                   
                 else if (realDistance > 2200) {
                     layer.setStyle(defaultCircle);
