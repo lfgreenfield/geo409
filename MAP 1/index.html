@@ -26,6 +26,7 @@
             display: inline-block;
             margin-right: 20px;
             color: #001323;
+/*            text-align: center;*/
         }
         h2 {
             display: inline-block;
@@ -44,6 +45,7 @@
         p {
             font-size: 1em;
             color: #001323;
+            margin: 0;
         }
         p.author-info {
             font-style: italic;
@@ -56,21 +58,19 @@
 
 <body>
     <header>
-        <h1>Melbourne Safety Map</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Melbourne Safety Map: Runaway Country Music Fest, March 20-22</h1>
+        <p><h2>Lord Mayor Doyle has issued a State of Emergency due to the recent invasion of alien iguanas. Participants in the Runaway Country Music Fest are strongly encouraged to use this map to safely navigate the city during the festival. Iguana Landing Zones* are shown with blue circles below. Find your safe zones** by clicking to place a flag marker. Iguana Landing Zones will turn red if your marker is too close.   </h2></p>
     </header>
 
     <div id='map'></div>
     
     <footer>
-        <p class='author-info'>Map authored by Laura Greenfield</p>
+        <p class='author-info'>Map authored by Laura Greenfield, using data from City of Melbourne</p>
     </footer>
 
     <footer>
-        
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
+        <p>*Iguana Landing Zones blue circles show the size of iguana base camp. Participants are strongly advised to not enter these zones</p>
+        <p>**safe zones are flag markers placed outside of a 2,200 meter buffer zone around Iguana Landing Zones. Iguanas have a tongue-range of 2,200 meters. If a flag marker is placed outside this zone, the Iguana Landing Zones will NOT turn red and will stay on the map. Use this to make a safe path to the festival</p>   
     </footer>
 
     <script>
@@ -217,7 +217,7 @@
             
         var marker = {
             safeDistance: true
-        };       // keep this code
+        };       
         
         map.on('click', function(e){
             
