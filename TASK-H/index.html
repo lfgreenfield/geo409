@@ -267,12 +267,12 @@
             
         var lineOptions = {
             color: "brown",
-            fillOpacity: 0.6
+            opacity: 10
         };
             
         var polygonOptions = {
             color: "gray",
-            fillOpacity: 0.6
+            fillOpacity: 0.8
         };     
        
         var featuresLeaflet = L.geoJson(features, {
@@ -281,8 +281,7 @@
                 },
                 style : function(feature) {
                     return { dashArray: "10, 5",
-                        weight: 3,
-                        fillOpacity: 0    
+                        weight: 2    
                     }
                 },
                 onEachFeature: function(feature, layer) {
