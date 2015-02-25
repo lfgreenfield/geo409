@@ -55,6 +55,12 @@
         .purple {
             color: #b6165b; 
         }
+        .brown {
+            color: #471200;
+        }
+        .gray {
+            color: #0F0F0A;
+        }
         
 
     </style>
@@ -100,8 +106,7 @@
             "marker-size": "medium",
             "marker-symbol": "",
             "Name": "Athens",
-            "Description": "City",
-            "Radius": 10000
+            "Description": "City"
         },
         "geometry": {
             "type": "Point",
@@ -118,8 +123,7 @@
             "marker-size": "medium",
             "marker-symbol": "",
             "Name": "Mykonos",
-            "Description": "Island",
-            "Radius": 10000
+            "Description": "Island"
         },
         "geometry": {
             "type": "Point",
@@ -136,8 +140,7 @@
             "marker-size": "medium",
             "marker-symbol": "",
             "Name": "Naxos",
-            "Description": "Island",
-            "Radius": 10000
+            "Description": "Island"
         },
         "geometry": {
             "type": "Point",
@@ -257,8 +260,38 @@
         }
     ]
  }
-    
-      var featuresLeaflet = L.geoJson(features).addTo(map);
+        var pointOptions = {
+            color: "red"            
+        };
+            
+        var lineOptions = {
+            color: "brown"
+        };
+            
+        var polygonOptions = {
+            color: "gray" 
+        };     
+       
+        var featuresLeaflet = L.geoJson(features, {
+                pointToLayer: function(feature, latlng) {
+                    return L.circle (latlng, 6500); 
+                },
+                onEachFeature: function(feature, layer) {
+                    if (feature.geometry.type == "Point") {
+                        layer.setStyle(pointOptions);
+                        layer.bindPopup(feature.properties.Name)
+                     }
+                    if (feature.geometry.type == "LineString") {
+                        layer.setStyle(lineOptions);
+                    }
+                    if (feature.geometry.type == "Polygon") {
+                        layer.setStyle(polygonOptions);
+                    }
+                }
+            }).addTo(map);
+            //console.log(featuresLeaflet);
+        
+       
         
         // Begin writing/modifying code for Task H here
         
