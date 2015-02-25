@@ -158,7 +158,7 @@
             "stroke-opacity": 1,
             "fill": "#555555",
             "fill-opacity": 0.5,
-            "Name": "Stormy",
+            "Name": "Dangerous Water Warning Zone",
             "Description": "Danger Water"
         },
         "geometry": {
@@ -261,20 +261,29 @@
     ]
  }
         var pointOptions = {
-            color: "red"            
+            color: "red",
+            fillOpacity: 0.6
         };
             
         var lineOptions = {
-            color: "brown"
+            color: "brown",
+            fillOpacity: 0.6
         };
             
         var polygonOptions = {
-            color: "gray" 
+            color: "gray",
+            fillOpacity: 0.6
         };     
        
         var featuresLeaflet = L.geoJson(features, {
                 pointToLayer: function(feature, latlng) {
                     return L.circle (latlng, 6500); 
+                },
+                style : function(feature) {
+                    return { dashArray: "10, 5",
+                        weight: 3,
+                        fillOpacity: 0    
+                    }
                 },
                 onEachFeature: function(feature, layer) {
                     if (feature.geometry.type == "Point") {
@@ -286,6 +295,7 @@
                     }
                     if (feature.geometry.type == "Polygon") {
                         layer.setStyle(polygonOptions);
+                        layer.bindPopup(feature.properties.Name)
                     }
                 }
             }).addTo(map);
