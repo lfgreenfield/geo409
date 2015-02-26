@@ -68,16 +68,15 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Daily Grecian Travel Mapper</h1>
+        <h2>Warning Updates</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
+        <p>Map authored by Laura Greenfield</p>
+        <p>Hello, traveller. Thank you for choosing the following route: Athens --> Mykonos --> Naxos. Today, there is a Dangerous Water warning between Mykonos and Nakos.
         </p>
     </footer>
 
@@ -158,7 +157,7 @@
             "stroke-opacity": 1,
             "fill": "#555555",
             "fill-opacity": 0.5,
-            "Name": "Dangerous Water",
+            "Name": "Dangerous Water Zone",
             "Description": "WARNING"
         },
         "geometry": {
@@ -289,7 +288,7 @@
                     if (feature.geometry.type == "Point") {
                         layer.setStyle(pointOptions);
                         layer.bindPopup("<b>"+feature.properties.Name+"</b><b>" 
-                                        + "<b>Category:</b> " + feature.properties.Description)
+                                        + "<br>Category: " + feature.properties.Description)
                      }
                     if (feature.geometry.type == "LineString") {
                         layer.setStyle(lineOptions);
@@ -297,7 +296,7 @@
                     if (feature.geometry.type == "Polygon") {
                         layer.setStyle(polygonOptions);
                         layer.bindPopup("<b>"+feature.properties.Name+"</b><b>" 
-                                        + "<b>Category:</b> " + feature.properties.Description)
+                                        + "<br>Category: " + feature.properties.Description)
                     }
                 }
             }).addTo(map);  
