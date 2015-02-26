@@ -105,7 +105,7 @@
             "marker-color": "#7e7e7e",
             "marker-size": "medium",
             "marker-symbol": "",
-            "Name": "Athens",
+            "Name": "Stop 1: Athens",
             "Description": "City"
         },
         "geometry": {
@@ -122,7 +122,7 @@
             "marker-color": "#7e7e7e",
             "marker-size": "medium",
             "marker-symbol": "",
-            "Name": "Mykonos",
+            "Name": "Stop 2: Mykonos",
             "Description": "Island"
         },
         "geometry": {
@@ -139,7 +139,7 @@
             "marker-color": "#7e7e7e",
             "marker-size": "medium",
             "marker-symbol": "",
-            "Name": "Naxos",
+            "Name": "Stop 3: Naxos",
             "Description": "Island"
         },
         "geometry": {
@@ -158,8 +158,8 @@
             "stroke-opacity": 1,
             "fill": "#555555",
             "fill-opacity": 0.5,
-            "Name": "Dangerous Water Warning Zone",
-            "Description": "Danger Water"
+            "Name": "Dangerous Water",
+            "Description": "WARNING"
         },
         "geometry": {
             "type": "Polygon",
@@ -275,6 +275,7 @@
             fillOpacity: 0.8
         };     
        
+        
         var featuresLeaflet = L.geoJson(features, {
                 pointToLayer: function(feature, latlng) {
                     return L.circle (latlng, 6500); 
@@ -287,27 +288,19 @@
                 onEachFeature: function(feature, layer) {
                     if (feature.geometry.type == "Point") {
                         layer.setStyle(pointOptions);
-                        layer.bindPopup(feature.properties.Name)
+                        layer.bindPopup("<b>"+feature.properties.Name+"</b><b>" 
+                                        + "<b>Category:</b> " + feature.properties.Description)
                      }
                     if (feature.geometry.type == "LineString") {
                         layer.setStyle(lineOptions);
                     }
                     if (feature.geometry.type == "Polygon") {
                         layer.setStyle(polygonOptions);
-                        layer.bindPopup(feature.properties.Name)
+                        layer.bindPopup("<b>"+feature.properties.Name+"</b><b>" 
+                                        + "<b>Category:</b> " + feature.properties.Description)
                     }
                 }
-            }).addTo(map);
-            //console.log(featuresLeaflet);
-        
-//       LEFT TO DO:
-//        1. add descriptions to popup-refer to session4 task 
-//        2. create story around the map
-//        3. final commit
-//        4. change basemap if want to
-        
-        // Begin writing/modifying code for Task H here
-        
+            }).addTo(map);  
 
           
     </script>
