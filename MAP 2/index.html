@@ -112,9 +112,9 @@
                 return radius;  
         }
         
-        function calcDistance {
+        function calcDistance(lexingtonCoords, latlng) {
                 
-            var distance = lexingtonCoords.distanceTo(features.geometry.coordinates)
+            var distance = lexingtonCoords.distanceTo(latlng)
                 return distanceToLex;
             
             console.log(distance);
