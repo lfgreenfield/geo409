@@ -55,13 +55,74 @@
     </header>
 
         <!-- add HTML here-->
-
+        <div id='map'></div>
+    
     <footer>
         <!-- add HTML here-->
     </footer>
         
+        <script src="power-plants-assignment.js"></script> 
         <!-- load external JS file here-->
+    
     <script>
+        
+         var map = L.map('map', {
+             center: [36,-94],
+             zoom: 4,
+         });
+        
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a            href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 18
+        });
+        
+        map.addLayer(tiles);
+        
+        
+        plants.features.sort(function(a,b) {
+            return b.properties.capacity - a.properties.capacity;
+        });
+        
+        var lexingtonCoords = [38.0297, -84.4947];
+        
+        var distanceToLex = {};
+      
+        var data = L.geoJson(plants, {
+            filter: function(features, layer) {
+                if(features.properties.source = ["Hydro"] &&
+                    features.properties.source["Hydro"] < 500) {
+                        return features;
+                }
+            },
+            pointToLayer: function(features, latlng) {
+                return L.circleMarker(latlng, {
+                    weight: 1,
+                    fillOpacity: 0.8,
+                    radius: getRadius(features.properties.capacity)
+            })
+            }
+
+        }).addTo(map); 
+        
+          
+        function getRadius(area) {
+                var radius = Math.sqrt(area/Math.PI);
+                return radius;  
+        }
+        
+        function calcDistance {
+                
+            var distance = lexingtonCoords.distanceTo(features.geometry.coordinates)
+                return distanceToLex;
+            
+            console.log(distance);
+        }
+                             
+
+        
+        //console.log(plants);
 
           // add JavaScript here
         
