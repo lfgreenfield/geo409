@@ -98,9 +98,7 @@
         });
         
         
-//        var lexingtonCoords = [38.0297, -84.4947];
-//        
-//        var plantCoords = layer.getLatLng();
+        var lexingtonCoords = [38.0297, -84.4947];
       
         var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
@@ -113,8 +111,6 @@
                 })
             },
             filter: function(features, layer) {
-                
-//                var distanceToLex = getDistance(plantCoords);
                 
                 if(features.properties.source = ["Coal"] &&
                     features.properties.source["Coal"] <= 500) {
@@ -154,12 +150,14 @@
                     fillColor: 'blue', 
                     color: 'blue',
                     radius: getRadius(features.properties.capacity)
-//                    distanceToLex: measureDistance(latlng),
                 })
             },
             filter: function(features, layer) {
-                if(features.properties.source = ["Hydro"] &&
-                    features.properties.source["Hydro"] <= 500) {
+                
+                var latlng = layer.coordsToLatLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+                
+                if(features.properties.source["Hydro"] <= 500 && 
+                   latlng.distanceTo(lexingtonCoords) <= 400) {
                         return features               
                 }
             },
@@ -203,7 +201,7 @@
             collapsed: false
         }).addTo(map);
         
-        //console.log(plants);
+       
 
           // add JavaScript here
         
