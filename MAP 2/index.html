@@ -154,7 +154,7 @@
             },
             filter: function(features, layer) {
                 
-                var latlng = layer.coordsToLatLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+                var latlng = layer.coordsToLatLngs(features.geometry.coordinates[1], features.geometry.coordinates[0]);
                 
                 if(features.properties.source["Hydro"] <= 500 && 
                    latlng.distanceTo(lexingtonCoords) <= 400) {
