@@ -112,16 +112,23 @@
             },
             filter: function(features, layer) {
                 
-                if(features.properties.source = ["Coal"] &&
-                    features.properties.source["Coal"] <= 500) {
-                        return features
+                var coalCoords = L.latLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+//                    console.log(plantCoords);
+//                    console.log(lexingtonCoords);
+//                     
+                var distance = coalCoords.distanceTo(lexingtonCoords);
+//                    console.log(distance);
+                
+                if(features.properties.source["Coal"] <= 500 && 
+                   distance <= 400000) {
+                        return features               
                 }
             },
             onEachFeature: function(features, layer) {
                 var props = features.properties;
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+ 23+"MW"+" from Lexington, KY.</b>";
+                    "<b>"+"This plant is "+ 23+"km"+" from Lexington, KY.</b>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
@@ -151,14 +158,19 @@
                     color: 'blue',
                     radius: getRadius(features.properties.capacity)
                 })
+              
             },
             filter: function(features, layer) {
                 
-                var plantCoords = [features.geometry.coordinates[1], features.geometry.coordinates[0]];
-                    console.log(plantCoords);
+                var hydroCoords = L.latLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+//                    console.log(plantCoords);
+//                    console.log(lexingtonCoords);
+//                     
+                var distance = hydroCoords.distanceTo(lexingtonCoords);
+//                    console.log(distance);
                 
                 if(features.properties.source["Hydro"] <= 500 && 
-                   plantCoords.distanceTo(lexingtonCoords) <= 400) {
+                   distance <= 400000) {
                         return features               
                 }
             },
@@ -166,7 +178,7 @@
                 var props = features.properties;
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+ 23+"MW"+" from Lexington, KY.</b>";
+                    "<b>"+"This plant is "+ +"km"+" from Lexington, KY.</b>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
