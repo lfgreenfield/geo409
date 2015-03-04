@@ -86,10 +86,6 @@
         });
         
         var lexingtonCoords = [38.0297, -84.4947];
-        
-        var distanceToLex = {};
-        
-        var features = {};
       
         var data = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
@@ -101,14 +97,10 @@
             },
             filter: function(features, layer) {
                 if(features.properties.source = ["Hydro"] &&
-                    features.properties.source["Hydro"] < 500) {
-                        return features;
+                    features.properties.source["Hydro"] <= 500) {
+                        return features               
                 }
-            }, 
-            onEachLayer: function(feature, layer) {
-                
-            }
-            
+            },            
         }).addTo(map); 
         
           
@@ -117,8 +109,6 @@
                 return radius;  
         }
         
-        
-       
         //console.log(plants);
 
           // add JavaScript here
