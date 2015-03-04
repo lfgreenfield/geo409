@@ -44,6 +44,9 @@
             font-size: 1em;
             color: #001323;
         }
+        .coalColor {
+            color: #1F1F14;
+        }
         /* Additional style rules go here! */
         
     </style>
@@ -71,13 +74,19 @@
              zoom: 4,
          });
         
-        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a            href="http://cartodb.com/attributions">CartoDB</a>',
-            subdomains: 'abcd',
-            minZoom: 0,
-            maxZoom: 18
-        });
-        
+         var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+           minZoom: 0,
+           maxZoom: 18
+         });
+//        
+//        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+//            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a            href="http://cartodb.com/attributions">CartoDB</a>',
+//            subdomains: 'abcd',
+//            minZoom: 0,
+//            maxZoom: 18
+//        });
+//        
         map.addLayer(tiles);
         
         
@@ -92,12 +101,14 @@
                 return L.circleMarker(latlng, {
                     weight: 1,
                     fillOpacity: 0.8,
+                    fillColor: 'coalColor', 
+                    color: 'coalColor',
                     radius: getRadius(features.properties.capacity)
                 })
             },
             filter: function(features, layer) {
-                if(features.properties.source = ["Hydro"] &&
-                    features.properties.source["Hydro"] <= 500) {
+                if(features.properties.source = ["Coal"] &&
+                    features.properties.source["Coal"] <= 500) {
                         return features               
                 }
             },            
