@@ -154,10 +154,11 @@
             },
             filter: function(features, layer) {
                 
-                var latlng = layer.coordsToLatLngs(features.geometry.coordinates[1], features.geometry.coordinates[0]);
+                var plantCoords = [features.geometry.coordinates[1], features.geometry.coordinates[0]];
+                    console.log(plantCoords);
                 
                 if(features.properties.source["Hydro"] <= 500 && 
-                   latlng.distanceTo(lexingtonCoords) <= 400) {
+                   plantCoords.distanceTo(lexingtonCoords) <= 400) {
                         return features               
                 }
             },
