@@ -69,6 +69,7 @@
         
         <script src="power-plants-assignment.js"></script> 
         <script src="power-plants-assignment-hydro.js"></script>
+        <script src="states.js"></script>
     
     <script>
         
@@ -99,6 +100,12 @@
         
         
         var lexingtonCoords = [38.0297, -84.4947];
+        
+        var stateMap = L.geoJson(states, {
+            fillOpacity: 0,
+            weight: 1,
+            color: 'black'
+        }).addTo(map);
       
         var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
@@ -117,6 +124,8 @@
 //                    console.log(lexingtonCoords);
 //                     
                 var distance = coalCoords.distanceTo(lexingtonCoords);
+                features.properties.dist = distance;
+//                      console.log(features.properties.dist);
 //                    console.log(distance);
                 
                 if(features.properties.source["Coal"] <= 500 && 
@@ -126,9 +135,10 @@
             },
             onEachFeature: function(features, layer) {
                 var props = features.properties;
+//                    console.log(features.properties.dist);
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+ 23+"km"+" from Lexington, KY.</b>";
+                    "<b>"+"This plant is "+features.properties.dist +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
@@ -167,6 +177,7 @@
 //                    console.log(lexingtonCoords);
 //                     
                 var distance = hydroCoords.distanceTo(lexingtonCoords);
+                features.properties.dist = distance;
 //                    console.log(distance);
                 
                 if(features.properties.source["Hydro"] <= 500 && 
@@ -178,7 +189,7 @@
                 var props = features.properties;
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+ +"km"+" from Lexington, KY.</b>";
+                    "<b>"+"This plant is "+features.properties.dist +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
