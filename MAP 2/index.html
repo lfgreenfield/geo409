@@ -47,25 +47,27 @@
         .coalColor {
             color: #1F1F14;
         }
-        /* Additional style rules go here! */
+        p.author-info {
+            font-style: italic;
+            text-align: right;
+            font-size: 0.9em;     
+        }
         
     </style>
 </head>
 
 <body>
     <header>
-        <!-- add HTML here-->
+        <h1>Coal</h1>
     </header>
-
-        <!-- add HTML here-->
+    
         <div id='map'></div>
     
     <footer>
-        <!-- add HTML here-->
+        <p class = 'author-info'>Map authored by LG</p>
     </footer>
         
         <script src="power-plants-assignment.js"></script> 
-        <!-- load external JS file here-->
     
     <script>
         
@@ -97,7 +99,7 @@
         
         var lexingtonCoords = [38.0297, -84.4947];
       
-        var data = L.geoJson(plants, {
+        var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
                 return L.circleMarker(latlng, {
                     weight: 1,
@@ -110,7 +112,7 @@
             filter: function(features, layer) {
                 if(features.properties.source = ["Coal"] &&
                     features.properties.source["Coal"] <= 500) {
-                        return features               
+                        return features
                 }
             },
             onEachFeature: function(features, layer) {
@@ -138,6 +140,48 @@
             }
         }).addTo(map); 
         
+        var hydroData = L.geoJson(plants, {
+            pointToLayer: function(features, latlng) {
+                return L.circleMarker(latlng, {
+                    weight: 1,
+                    fillOpacity: 0.8,
+                    fillColor: 'blue', 
+                    color: 'blue',
+                    radius: getRadius(features.properties.capacity)
+                })
+            },
+            filter: function(features, layer) {
+                if(features.properties.source = ["Hydro"] &&
+                    features.properties.source["Hydro"] <= 500) {
+                        return features               
+                }
+            },
+            onEachFeature: function(features, layer) {
+                var props = features.properties;
+                var content = "<b>"+props.plant_name+"</b><br>"+
+                    props.capacity.toLocaleString()+" MW<br><b>"+
+                    "<b>"+"This plant is "+ 23+"MW"+" from Lexington, KY.</b>";
+                var source = props.source;
+                for(var fuel in source) {
+                    content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
+                }
+                
+                layer.bindPopup(content);
+                
+                layer.on('mouseover', function() {
+                    layer.setStyle({
+                        fillColor: 'yellow'
+                    });
+                });
+                layer.on('mouseout', function() {
+                    layer.setStyle({
+                        fillColor: 'blue'
+                    });
+                });
+            }
+        }).addTo(map); 
+        
+        
           
         function getRadius(area) {
                 var radius = Math.sqrt(area/Math.PI);
@@ -145,7 +189,8 @@
         }
         
         var controls = {
-            "Coal": data
+            "Coal": coalData,
+            "Hydro": hydroData
         };
         
         L.control.layers(null, controls, {
