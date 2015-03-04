@@ -58,7 +58,7 @@
 
 <body>
     <header>
-        <h1>Coal</h1>
+        <h1>Coal & Hydro</h1>
     </header>
     
         <div id='map'></div>
@@ -68,6 +68,7 @@
     </footer>
         
         <script src="power-plants-assignment.js"></script> 
+        <script src="power-plants-assignment-hydro.js"></script>
     
     <script>
         
@@ -97,7 +98,9 @@
         });
         
         
-        var lexingtonCoords = [38.0297, -84.4947];
+//        var lexingtonCoords = [38.0297, -84.4947];
+//        
+//        var plantCoords = layer.getLatLng();
       
         var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
@@ -110,6 +113,9 @@
                 })
             },
             filter: function(features, layer) {
+                
+//                var distanceToLex = getDistance(plantCoords);
+                
                 if(features.properties.source = ["Coal"] &&
                     features.properties.source["Coal"] <= 500) {
                         return features
@@ -140,7 +146,7 @@
             }
         }).addTo(map); 
         
-        var hydroData = L.geoJson(plants, {
+        var hydroData = L.geoJson(hydroPlants, {
             pointToLayer: function(features, latlng) {
                 return L.circleMarker(latlng, {
                     weight: 1,
@@ -148,6 +154,7 @@
                     fillColor: 'blue', 
                     color: 'blue',
                     radius: getRadius(features.properties.capacity)
+//                    distanceToLex: measureDistance(latlng),
                 })
             },
             filter: function(features, layer) {
@@ -178,14 +185,13 @@
                         fillColor: 'blue'
                     });
                 });
-            }
-        }).addTo(map); 
-        
+            },
+        }).addTo(map);        
         
           
         function getRadius(area) {
-                var radius = Math.sqrt(area/Math.PI);
-                return radius;  
+            var radius = Math.sqrt(area/Math.PI);
+            return radius;  
         }
         
         var controls = {
