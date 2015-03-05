@@ -76,7 +76,7 @@
         
          var map = L.map('map', {
              center: [38,-84],
-             zoom: 6,
+             zoom: 5,
          });
         
          var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -110,14 +110,23 @@
       
         var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
-                return L.circleMarker(latlng, {
-                    weight: 1,
-                    fillOpacity: 0.8,
-                    fillColor: 'coalColor', 
-                    color: 'coalColor',
-                    radius: getRadius(features.properties.capacity)
-                })
-            },
+                  var smallIcon = L.icon.extend({
+                      options: {
+                          'iconSize': [10, 10]
+                      }
+                  });
+                  var iguanaIcon = new smallIcon();
+                      return L.marker(latlng, {icon: smallIcon});
+                      },   
+                },
+//                return L.circleMarker(latlng, {
+//                    weight: 1,
+//                    fillOpacity: 0.8,
+//                    fillColor: 'coalColor', 
+//                    color: 'coalColor',
+//                    radius: getRadius(features.properties.capacity)
+//                })
+            
             filter: function(features, layer) {
                 
                 var coalCoords = L.latLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
