@@ -47,36 +47,41 @@
         .coalColor {
             color: #1F1F14;
         }
-        /* Additional style rules go here! */
+        p.author-info {
+            font-style: italic;
+            text-align: right;
+            font-size: 0.9em;     
+        }
         
     </style>
 </head>
 
 <body>
     <header>
-        <!-- add HTML here-->
+        <h1>Where Are the Power Plants?</h1>
+        <p>Map shows coal and hydroelectric power plants within 400 km of Lexington, KY that produce less than 500 MW.</p>
     </header>
-
-        <!-- add HTML here-->
+    
         <div id='map'></div>
     
     <footer>
-        <!-- add HTML here-->
+    <p class = 'author-info'>Map authored by LG</p>
     </footer>
         
         <script src="power-plants-assignment.js"></script> 
-        <!-- load external JS file here-->
+        <script src="power-plants-assignment-hydro.js"></script>
+        <script src="states.js"></script>
     
     <script>
         
          var map = L.map('map', {
-             center: [36,-94],
-             zoom: 4,
+             center: [38,-84],
+             zoom: 6,
          });
         
          var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-           minZoom: 0,
+           minZoom: 4,
            maxZoom: 18
          });
 //        
@@ -95,65 +100,133 @@
         });
         
         
-        var iguana = L.icon({
-             iconUrl: 'http://cdn.flaticon.com/png/256/47411.png',
-         });
+        var lexingtonCoords = [38.0297, -84.4947];
         
-        var data = L.geoJson(plants, {
+        var stateMap = L.geoJson(states, {
+            fillOpacity: 0,
+            weight: 1,
+            color: 'black'
+        }).addTo(map);
+      
+        var coalData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
-                return L.marker(latlng, {icon: iguana}, {
-                    iconSize: features.properties.capacity
-                });
+                return L.circleMarker(latlng, {
+                    weight: 1,
+                    fillOpacity: 0.8,
+                    fillColor: 'coalColor', 
+                    color: 'coalColor',
+                    radius: getRadius(features.properties.capacity)
+                })
             },
             filter: function(features, layer) {
-                if(features.properties.source = ["Coal"] &&
-                    features.properties.source["Coal"] <= 500) {
+                
+                var coalCoords = L.latLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+//                    console.log(plantCoords);
+//                    console.log(lexingtonCoords);
+//                     
+                var distance = coalCoords.distanceTo(lexingtonCoords);
+                features.properties.dist = distance;
+//                      console.log(features.properties.dist);
+//                    console.log(distance);
+                
+                if(features.properties.source["Coal"] <= 500 && 
+                   distance <= 400000) {
                         return features               
                 }
-         },
+            },
             onEachFeature: function(features, layer) {
                 var props = features.properties;
+//                    console.log(features.properties.dist);
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+ 23+"MW"+" from Lexington, KY.</b>";
+                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
                 }
                 
-//                layer.bindPopup(content);
-//                
-//                layer.on('mouseover', function() {
-//                    layer.setStyle({
-//                        fillColor: 'yellow'
-//                    });
-//                });
-//                layer.on('mouseout', function() {
-//                    layer.setStyle({
-//                        fillColor: 'coalColor'
-//                    });
-//                });
+                layer.bindPopup(content);
+                
+                layer.on('mouseover', function() {
+                    layer.setStyle({
+                        fillColor: 'yellow'
+                    });
+                });
+                layer.on('mouseout', function() {
+                    layer.setStyle({
+                        fillColor: 'coalColor'
+                    });
+                });
             }
         }).addTo(map); 
         
-//        function resize(area) {
-//            var iconSize = (area) * 0.5;
-//                return iconSize;
-//        }  
+        var hydroData = L.geoJson(hydroPlants, {
+            pointToLayer: function(features, latlng) {
+                return L.circleMarker(latlng, {
+                    weight: 1,
+                    fillOpacity: 0.8,
+                    fillColor: 'blue', 
+                    color: 'blue',
+                    radius: getRadius(features.properties.capacity)
+                })
+              
+            },
+            filter: function(features, layer) {
+                
+                var hydroCoords = L.latLng([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
+//                    console.log(plantCoords);
+//                    console.log(lexingtonCoords);
+//                     
+                var distance = hydroCoords.distanceTo(lexingtonCoords);
+                features.properties.dist = distance;
+//                    console.log(distance);
+                
+                if(features.properties.source["Hydro"] <= 500 && 
+                   distance <= 400000) {
+                        return features               
+                }
+            },
+            onEachFeature: function(features, layer) {
+                var props = features.properties;
+                var content = "<b>"+props.plant_name+"</b><br>"+
+                    props.capacity.toLocaleString()+" MW<br><b>"+
+                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
+                var source = props.source;
+                for(var fuel in source) {
+                    content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
+                }
+                
+                layer.bindPopup(content);
+                
+                layer.on('mouseover', function() {
+                    layer.setStyle({
+                        fillColor: 'yellow'
+                    });
+                });
+                layer.on('mouseout', function() {
+                    layer.setStyle({
+                        fillColor: 'blue'
+                    });
+                });
+            },
+        }).addTo(map);        
         
-//        function size(area) {
-//                return iconSize * 0.5;  
-//        }
+          
+        function getRadius(area) {
+            var radius = Math.sqrt(area/Math.PI);
+            return radius;  
+        }
         
-//        var controls = {
-//            "Coal": data
-//        };
-//        
-//        L.control.layers(null, controls, {
-//            collapsed: false
-//        }).addTo(map);
+        var controls = {
+            "Coal": coalData,
+            "Hydro": hydroData
+        };
         
-        //console.log(plants);
+        L.control.layers(null, controls, {
+            collapsed: false
+        }).addTo(map);
+        
+       
 
           // add JavaScript here
         
