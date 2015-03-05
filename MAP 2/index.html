@@ -58,13 +58,14 @@
 
 <body>
     <header>
-        <h1>Coal & Hydro</h1>
+        <h1>Where Are the Power Plants?</h1>
+        <p>Map shows coal and hydroelectric power plants within 400 km of Lexington, KY that produce less than 500 MW.</p>
     </header>
     
         <div id='map'></div>
     
     <footer>
-        <p class = 'author-info'>Map authored by LG</p>
+    <p class = 'author-info'>Map authored by LG</p>
     </footer>
         
         <script src="power-plants-assignment.js"></script> 
@@ -74,13 +75,13 @@
     <script>
         
          var map = L.map('map', {
-             center: [36,-94],
-             zoom: 4,
+             center: [38,-84],
+             zoom: 6,
          });
         
          var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-           minZoom: 0,
+           minZoom: 4,
            maxZoom: 18
          });
 //        
@@ -138,7 +139,7 @@
 //                    console.log(features.properties.dist);
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+features.properties.dist +" km"+" from Lexington, KY.</b><br>";
+                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
@@ -189,7 +190,7 @@
                 var props = features.properties;
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+features.properties.dist +" km"+" from Lexington, KY.</b><br>";
+                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
