@@ -69,7 +69,6 @@
     </footer>
         
         <script src="power-plants-assignment.js"></script> 
-        <script src="power-plants-assignment-hydro.js"></script>
         <script src="states.js"></script>
     
     <script>
@@ -139,7 +138,7 @@
 //                    console.log(features.properties.dist);
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
+                    "<b>"+"This plant is "+(features.properties.dist/1000).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
@@ -160,7 +159,7 @@
             }
         }).addTo(map); 
         
-        var hydroData = L.geoJson(hydroPlants, {
+        var hydroData = L.geoJson(plants, {
             pointToLayer: function(features, latlng) {
                 return L.circleMarker(latlng, {
                     weight: 1,
@@ -190,7 +189,7 @@
                 var props = features.properties;
                 var content = "<b>"+props.plant_name+"</b><br>"+
                     props.capacity.toLocaleString()+" MW<br><b>"+
-                    "<b>"+"This plant is "+(features.properties.dist).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
+                    "<b>"+"This plant is "+(features.properties.dist/1000).toLocaleString() +" km"+" from Lexington, KY.</b><br>";
                 var source = props.source;
                 for(var fuel in source) {
                     content+="<b>"+fuel+"</b>: " +source[fuel].toLocaleString()+" MW<br>";
