@@ -72,22 +72,24 @@
 
     <script>
         var options = {
-            center: [34,-85],
-            zoom: 5
+            center: [39.8282,-98.6],
+            zoom: 4
         }
         var map = L.map('map', options);
-        var tiles = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
-            attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
-            subdomains: '0123',
-            minZoom: 2,
-            maxZoom: 18
+        
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a   href="http://cartodb.com/attributions">CartoDB</a>',
+                    subdomains: 'abcd',
+                    minZoom: 0,
+                    maxZoom: 18
         });
         map.addLayer(tiles);
 
                                                                               
           var layerInfo = {
             hydroLayer: {source:"Hydro", color:'#1f78b4'}, 
-            windLayer: {source:"Wind", color:'#a6cee3'}
+            nuclearLayer: {source:"Nuclear", color:'#FFFF00'},
+            gasLayer: {source: "Natural Gas", color: '#91cf60'}  
         }                                          
         
          var geoJsonLayers = {};
@@ -96,7 +98,10 @@
         for(var layer in layerInfo) {     
             geoJsonLayers[layer] = L.geoJson(plants, {
                 pointToLayer: function(feature,latlng) {
-                    return L.circleMarker(latlng);
+                    return L.circleMarker(latlng, {
+                        width: 0.5,
+                        fillOpacity: 0.3
+                    });
                 },
                 filter: function(feature) {
                     if(feature.properties.fuel_source[layerInfo[layer].source]) {
@@ -114,6 +119,8 @@
                     
                         map.on('click', function(e) {
                             
+                        var props = feature.properties;
+                                                  
                         var coords = L.latLng([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
         
                         var distance = e.latlng.distanceTo(coords)/1000;
@@ -129,7 +136,7 @@
                                 stroke: true,
                                 fill: true
                             });
-                             layer.bindPopup("I am <b>"+distance.toLocaleString()+"km</b><br> from the click point.");
+                            layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is  "+distance.toLocaleString()+" km</b><br> from the click point.");                            
                             };             
                         }),
                                
@@ -157,32 +164,9 @@
                 )
                 },
                 
-            }).addTo(map);
+            });
                 
-        } 
-               
-        
-//                map.on('dblclick', function(e) {
-//                    geoJsonLayers[layer].eachLayer(function(layer) {
-//                    var distance = e.latlng.distanceTo(layer.getLatlng())/1000;
-//                
-//                    if(distance > 200) {
-//                        layer.setStyle({
-//                            stroke: false, 
-//                            fill: false
-//                        });
-//                    }
-//                    else {
-//                        layer.setStyle({
-//                            stroke: true,
-//                            fill: true
-//                        });
-//                        }
-//                    });
-//                });
-//                
-//        }    
-                            
+        }                 
 
         
         function getRadius(val) {
@@ -190,13 +174,14 @@
              return radius;
          }
         
-        
-        var sourcesLabels = {
-            "Hydro": geoJsonLayers.hydroLayer,
-            "Wind": geoJsonLayers.windLayer
-        }
 
-        L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
+        var sourcesLayers = {
+        "<b style='color:#1f78b4'>Hydro</b>": geoJsonLayers.hydroLayer,
+        "<b style='color:#91cf60'>Natural Gas</b>": geoJsonLayers.gasLayer,
+        "<b style='color:#FFFF00; text-shadow: 0px 0px 1px #333;'>Nuclear</b>": geoJsonLayers.nuclearLayer
+    }
+
+        L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
         
 
 </script>
