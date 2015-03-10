@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             background: whitesmoke;
-            font-family: Lato, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             color: #0D0000;
         }
         header {
@@ -28,6 +28,7 @@
             display: inline-block;
             margin-right: 20px;
             color: #001323;
+            font-family: "Times New Roman", Times, serif;
         }
         h2 {
             display: inline-block;
@@ -46,6 +47,11 @@
             font-size: 1em;
             color: #001323;
         }
+         p.author-info {
+             font-style: italic;
+             text-align: right;
+             font-size: 0.9em;
+         }
         /* Additional style rules go here! */
         
         .popup {
@@ -57,17 +63,14 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>US Electric Power Generation: landscape of sustainability</h1>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
+        <p class = 'author-info'>Map authored by Laura Greenfield</p>
+        <p>This map is presented to Power Company. It displays natural gas, hydraulic, and nuclear power plants in the United States. Click once on the map to display power plants within 500 km of the click. Double-click to display plants within 200 km of the click. Power plants are proprotionally sized according to their capacity (megawatts). Click on a power plant for further information. </p>
     </footer>
 
     <script>
