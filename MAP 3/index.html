@@ -114,61 +114,68 @@
                         fillColor: layerInfo[layer].color,
                         radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
                     } 
-                },
-                onEachFeature: function(feature, layer) {
-                    
-                        map.on('click', function(e) {
-                            
-                        var props = feature.properties;
-                                                  
-                        var coords = L.latLng([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
+                },            
+            }).addTo(map);
+                
+        }   
         
-                        var distance = e.latlng.distanceTo(coords)/1000;
-                        
-                        if(distance > 500) {
+//        console.log(geoJsonLayers[layer]);      
+        
+         map.on('click', function(e) {
+             
+            for(var r in geoJsonLayers) {                
+//                    console.log(r);                
+               geoJsonLayers[r].eachLayer(function (layer) {
+                   
+                    var props = layer.feature.properties;
+//                        console.log(props);//                   
+//                        console.log(layer.feature.geometry.coordinates);                   
+                    var coords = L.latLng([layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]]);                   
+//                        console.log(e);//                 
+                    var distance = e.latlng.distanceTo(coords)/1000;
+                            if(distance > 500) {
+                                layer.setStyle({
+                                    stroke: false,
+                                    fill: false
+                            });
+                            }
+                            else {
+                                layer.setStyle({
+                                    stroke: true,
+                                    fill: true
+                            });
+                            layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is                                  "+distance.toLocaleString()+" km</b><br> from the click point.");
+                            };                                           
+
+               });
+            }
+         });
+                                            
+         map.on('dblclick', function(e) {
+                            
+             for(var r in geoJsonLayers) {
+                 geoJsonLayers[r].eachLayer(function (layer) {
+                     var props = layer.feature.properties;
+                     var coords = L.latLng([layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]]);
+                     var distance = e.latlng.distanceTo(coords)/1000; 
+                        if(distance > 200) {
                             layer.setStyle({
                                 stroke: false,
                                 fill: false
                             });
                         }
                         else {
-                            layer.setStyle({
+                            layer.setStyle ({
                                 stroke: true,
                                 fill: true
                             });
-                            layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is  "+distance.toLocaleString()+" km</b><br> from the click point.");                            
-                            };             
-                        }),
-                               
-                        map.on('dblclick', function(e) {
-                            
-                            var coords = L.latlng([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
-                            
-                            var distance = e.latlng.distanceTo(coords)/1000;
-                            
-                            if(distance > 200) {
-                                layer.setStyle({
-                                    stroke: false,
-                                    fill: false
-                                });
-                            }
-                            else {
-                                layer.setStyle({
-                                    stroke: true,
-                                    fill: true
-                                });
-                                
-                                layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is  "+distance.toLocaleString()+" km</b><br> from the click point.");
-                            }
-                        }
-                )
-                },
-                
-            });
-                
-        }                 
+                           layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is                                  "+distance.toLocaleString()+" km</b><br> from the click point.");  
+                        };
+                 });
+               }
+             });           
+                           
 
-        
         function getRadius(val) {
              var radius = Math.sqrt(val/Math.PI);
              return radius;
