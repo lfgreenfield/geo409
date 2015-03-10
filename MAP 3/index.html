@@ -87,9 +87,9 @@
 
                                                                               
           var layerInfo = {
-            hydroLayer: {source:"Hydro", color:'#1f78b4'}, 
-            nuclearLayer: {source:"Nuclear", color:'#FFFF00'},
-            gasLayer: {source: "Natural Gas", color: '#91cf60'}  
+            gasLayer: {source: "Natural Gas", color: '#91cf60'}, 
+            hydroLayer: {source:"Hydro", color:'#1f78b4'},    
+            nuclearLayer: {source:"Nuclear", color:'#FFFF00'} 
         }                                          
         
          var geoJsonLayers = {};
@@ -116,7 +116,6 @@
                     } 
                 },            
             }).addTo(map);
-                
         }   
         
 //        console.log(geoJsonLayers[layer]);      
@@ -173,7 +172,9 @@
                         };
                  });
                }
-             });           
+             }); 
+        
+        map.doubleClickZoom.disable();
                            
 
         function getRadius(val) {
