@@ -135,9 +135,10 @@
                 }          
             }).addTo(map);
             
-            drawMap();
-            
             ui();
+            drawLegend();
+            drawMap();
+
               
         });
         
@@ -159,7 +160,7 @@
                                 ((props[attribute]/props[norm])*100).toLocaleString());  
             });
             
-            drawLegend(breaks);
+            updateLegend(breaks);
         }
         
         function getClassBreaks() {
@@ -190,30 +191,34 @@
             }
         }
         
-        function drawLegend(breaks) {
+        function drawLegend() {
             
             var legend = L.control({position: 'topleft'});
 
             legend.onAdd = function (map) {
                 
                 var div = L.DomUtil.create('div', 'legend');
-                
-                div.innerHTML = "<h3>" + attribute + " per " + norm + "</h3><ul>"; 
-
-                for (var i = 0; i < breaks.length-1; i++) {
-                    var color = getColor(breaks[i + 1], breaks);
-                    div.innerHTML +=
-                        '<li><span style="background:' + color + '"></span> ' +
-                        (breaks[i]*100).toLocaleString() + ' &mdash; ' + 
-                        (breaks[i + 1]*100).toLocaleString() + '</li>';
-                }
-                div.innerHTML += "</ul>"
-                    return div;
-                
+              
+                    return div;               
                     
             };
 
             legend.addTo(map);
+        }
+        
+          function updateLegend(breaks) {
+
+            var legend = $('.legend').html("<h3>" + attribute + "</h3><ul>"); 
+
+            for (var i = 0; i < breaks.length-1; i++) {
+                var color = getColor(breaks[i + 1], breaks);
+                legend.append('<li><span style="background:' + color + '"></span> ' +
+                    (breaks[i]*100).toLocaleString() + ' &mdash; ' + 
+                    (breaks[i + 1]*100).toLocaleString() + '</li>');
+            }
+            
+            legend.append("</ul>");
+              
         }
         
         function ui() {
@@ -236,7 +241,10 @@
         
         $('select[name="occupied"]').change(function() {
             
-                    console.log(this);
+            attribute = $(this).val();
+            
+            drawMap();
+            
         });
 
     </script>
