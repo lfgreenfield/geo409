@@ -75,6 +75,17 @@
         .leaflet-popup-content {
             max-width: 160px;   
         }
+        .info {
+            padding: 6px 8px;
+            font-size: 1em;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            text-align: right;   
+        }
+        .info h3 {
+            margin: 0;   
+        }
         
     </style>
 </head>
@@ -138,6 +149,7 @@
             ui();
             drawLegend();
             drawMap();
+            drawInfo();
 
               
         });
@@ -170,6 +182,11 @@
             dataLayer.eachLayer(function(layer) {
                 var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
                 values.push(value);   
+                
+                layer.on('click', function() {
+                    updateInfo(this);
+                });
+                
             }); 
             
             var breaks = ss.jenks(values, 5);
@@ -230,11 +247,27 @@
                 var div = L.DomUtil.create('div', 'info');
 
                 return div;  
+                
+            info.addTo(map);
+//                $(".info").hide();    
 
         }
             
         info.addTo(map);
-    }
+        }
+        
+        function updateInfo(layer) {
+
+            var props = layer.feature.properties;
+
+            var html = "<h3>"+props['NAME']+" County</h3>"+
+                    "total # occupied units: <b>"+ props["OCCUPIED"]+"</b><br>"+
+                    "# owned with mortgage or loan: <b>"+ props["OWNED_MORT"]+"</b><br>"+
+                    "# owned free and clear: <b>"+ props["OWNED_FREE"]+"</b><br>"+
+                    "# occupied by renters: <b>"+ props["RENTER"]+"</b>"
+
+            $(".info").html(html);
+        }
         
         function ui() {
             
