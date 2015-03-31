@@ -221,6 +221,21 @@
               
         }
         
+        function drawInfo() {
+
+            var info = L.control({position: 'topright'});
+
+            info.onAdd = function(map) {
+
+                var div = L.DomUtil.create('div', 'info');
+
+                return div;  
+
+        }
+            
+        info.addTo(map);
+    }
+        
         function ui() {
             
             var dataview = L.control({position: 'topleft'});
