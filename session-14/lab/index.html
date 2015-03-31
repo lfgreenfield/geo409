@@ -141,9 +141,6 @@
               
         });
         
-        $('select[name="occupied"]').change(function() {
-            
-        });
         
         function drawMap() {
             
@@ -223,17 +220,24 @@
             
             var dataview = L.control({position: 'topleft'});
             
-                console.log(dataview);
+//                console.log(dataview);
             
             dataview.onAdd = function(map){
                 
                 var controls = L.DomUtil.get('ui-controls');
                     return controls;
+                
             }
+            
             
             dataview.addTo(map);
                 
         }
+        
+        $('select[name="occupied"]').change(function() {
+            
+                    console.log(this);
+        });
 
     </script>
     
