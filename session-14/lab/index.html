@@ -141,6 +141,10 @@
               
         });
         
+        $('select[name="occupied"]').change(function() {
+            
+        });
+        
         function drawMap() {
             
             var breaks = getClassBreaks();
@@ -207,7 +211,7 @@
                         (breaks[i + 1]*100).toLocaleString() + '</li>';
                 }
                 div.innerHTML += "</ul>"
-                return div;
+                    return div;
                 
                     
             };
@@ -216,6 +220,19 @@
         }
         
         function ui() {
+            
+            var dataview = L.control({position: 'topleft'});
+            
+                console.log(dataview);
+            
+            dataview.onAdd = function(map){
+                
+                var controls = L.DomUtil.get('ui-controls');
+                    return controls;
+            }
+            
+            dataview.addTo(map);
+                
         }
 
     </script>
