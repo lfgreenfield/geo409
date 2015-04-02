@@ -131,7 +131,7 @@
         
         //create global variables dataLayer, attribute, and norm
         var dataLayer,
-            attribute = "VACANT_MIG",
+            attribute = "VACANT_FO2",
             norm = "VACANT";
         
         //create global variable
@@ -195,6 +195,7 @@
                                 layer.feature.properties[norm])*100).toLocaleString());
             });
             
+            //calilng updateLegend function, passing 'breaks' 
             updateLegend(breaks);
         }
         
@@ -264,47 +265,69 @@
             }
         }
         
+        //function to draw the legend box
         function drawLegend() {
             
+            //creating new leafleft control object and positioning it in top-left corner
             var legend = L.control({position: 'topleft'});
 
+            //creating actions for when the legend is added to the map
             legend.onAdd = function (map) {
                 
+                //new HTML <div> element and naming it 'legend'
                 var div = L.DomUtil.create('div', 'legend');
               
+                    // return populated div, to be added to the map
                     return div;               
                     
             };
 
+            //adding legend to map
             legend.addTo(map);
         }
         
-          function updateLegend(breaks) {
+        //function to populate the legend, passes 'breaks' array through it
+        function updateLegend(breaks) {
               
+            //selects already created legend
+            //populates with name of data attribute
             var legend = $('.legend').html("<h3>" + labels[attribute] + "</h3><ul>"); 
 
+            //for each of the breaks
             for (var i = 0; i < breaks.length-1; i++) {
+                
+                // determine the color associated with each break value,
+                // include the lower range value
                 var color = getColor(breaks[i + 1], breaks);
+                
+                //insert content for each class break into legend
                 legend.append('<li><span style="background:' + color + '"></span> ' +
                     (breaks[i]*100).toLocaleString() + ' &mdash; ' + 
                     (breaks[i + 1]*100).toLocaleString() + '</li>');
             }
             
+            //close un-ordered list
             legend.append("</ul>");
               
         }
         
+        //function to add info panel to map
         function drawInfo() {
 
+            //creating leafleft control object and positioning top-right
             var info = L.control({position: 'topright'});
 
+            //actions for when info panel is added to map
             info.onAdd = function(map) {
 
+                //creating new div element
                 var div = L.DomUtil.create('div', 'info');
 
-                return div;  
+                    return div;  
                 
+            //adding to map
             info.addTo(map);
+                
             $(".info").hide();    
 
         }
@@ -312,41 +335,50 @@
         info.addTo(map);
         }
         
+        //function to insert conent into new info div element
         function updateInfo(layer) {
 
+            //creating variable to save space and call attributes
             var props = layer.feature.properties;
 
+           //variable containing concatenated string info
             var html = "<h3>"+props['NAME']+" County</h3>"+
                     "total # vacant properties: <b>"+ props["VACANT"]+"</b><br>"+
                     "# vacant properties for sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
                     "# vacant properties used recreationally/seasonally: <b>"+ props["VACANT_SEA"]+"</b><br>"+
                     "# vacant properties used for migrant workers: <b>"+ props["VACANT_MIG"]+"</b>"
 
+            //selecting the div class and adding the html info
             $(".info").html(html);
         }
         
+        //
         function ui() {
             
+            //creating leafleft control object and positioning it to top-left
             var dataview = L.control({position: 'topleft'});
             
-//                console.log(dataview);
-            
+            //when added to map
             dataview.onAdd = function(map){
                 
+                //creating new div element
                 var controls = L.DomUtil.get('ui-controls');
                     return controls;
                 
             }
             
-            
+            //adding new div element to map
             dataview.addTo(map);
                 
         }
         
+        //code to determine what happens when user selects a certain form
         $('select[name="occupied"]').change(function() {
             
+            //re-assign global variable 'attribute' to whichever form the user selects
             attribute = $(this).val();
             
+            //calling drawMap function which loops through all layers and assigns proper color 
             drawMap();
             
         });
