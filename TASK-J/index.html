@@ -173,17 +173,23 @@
         
         function drawMap() {
             
+            //calling getClassBreaks function
             var breaks = getClassBreaks();
 
+            //code to loop through each data layer
             dataLayer.eachLayer(function(layer) {
                 
+                //creating variable props to save space
                 var props = layer.feature.properties;
                 
+                //setting the style for each later depending on the attribute and data
                 layer.setStyle({
+                    //calls getColor function
                     fillColor: getColor(props[attribute]/
                                         props[norm], breaks)
                 }); 
                 
+                //creating a pop-up for each layer that is populated with its attribute properties
                 layer.bindPopup("<b>"+layer.feature.properties["NAME"]+" County</b></br>" +
                         labels[attribute] + ": " + ((layer.feature.properties[attribute]/
                                 layer.feature.properties[norm])*100).toLocaleString());
@@ -192,18 +198,28 @@
             updateLegend(breaks);
         }
         
+        //function to determine range and establish classification breaks
         function getClassBreaks() {
             
+            //creating array to store range of values
             var values = [];
             
-            dataLayer.eachLayer(function(layer) {
+            //code to loop through each data layer and add to array 'value'
+            dataLayer.eachLayer(function(layer) {                
                 var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
-                values.push(value);   
+                    values.push(value);   
                 
+                //creating action for user mouseover and mouseout; purpose: visual affordance while maintaining normalized color value
                 layer.on('mouseover', function() {
+                    
+                    var props = layer.feature.properties;
+                    
                     layer.setStyle({
-                        fillColor: 'yellow'
+                        fillColor: getColor(props[attribute]/props[norm], breaks),
+                        color: 'yellow',
+                        weight: 6
                     });
+                    
                     updateInfo(this);
                 });
                 
@@ -213,25 +229,20 @@
                     
                     layer.setStyle({
                         fillColor: getColor(props[attribute]/
-                                        props[norm], breaks)
+                                        props[norm], breaks),
+                        color: '#dddddd',
+                        weight: 2
                     });
-                });
-                
-//                dataLayer.on('mouseover', function() {
-//                    $(".info").show();
-//                    updateInfo(this);
-//                });
-//                dataLayer.on('mouseout', function() {
-//                    $(".info").hide();    
-//                });
-                
+                });                
             }); 
             
+            //determining 5 classification breaks
             var breaks = ss.jenks(values, 5);
             return breaks;
             
         }   
         
+        //function to accept the calculated value and array of classification breaks; determines class; returns designated color
         function getColor(d, breaks) {
             if(d <= breaks[1]) {
                 return '#f1eef6';
