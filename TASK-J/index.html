@@ -222,7 +222,7 @@
                         color: 'yellow',
                         weight: 6,
                         opacity: 2
-                    });
+                    }).bringToFront;
                     
                     //calling function updateInfo in order to populate info box during mouseover event
                     updateInfo(this);
@@ -241,7 +241,18 @@
                         color: '#dddddd',
                         weight: 2
                     });
-                });                
+                }); 
+                
+                 // when mousing over the map
+                dataLayer.on('mouseover', function() {
+                    $(".info").show(); // display the info panel
+                });
+                
+                // when mousing off the map
+                dataLayer.on('mouseout', function() {
+                    $(".info").hide(); // hide the info panel
+                });
+                
             }); 
             
             //determining 5 classification breaks
@@ -323,16 +334,14 @@
                 //creating new div element
                 var div = L.DomUtil.create('div', 'info');
 
-                    return div;  
-                
-            //adding to map
-            info.addTo(map);
-                
-            $(".info").hide();    
+                    return div;    
 
-        }
+            }
             
         info.addTo(map);
+            
+        $(".info").hide();  
+            
         }
         
         //function to insert conent into new info div element
