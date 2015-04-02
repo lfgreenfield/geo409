@@ -129,12 +129,12 @@
         }
         var map = L.map('map', options);
         
-        // Begin module 13 code here
-        
+        //create global variables dataLayer, attribute, and norm
         var dataLayer,
             attribute = "VACANT_MIG",
             norm = "VACANT";
         
+        //create global variable
         var labels = {
                 "VACANT": "total vacant properties",
                 "VACANT_FO2": "% vacant properties for sale",
@@ -142,8 +142,10 @@
                 "VACANT_MIG": "% vacant properties used for migrant workers",  
         };
         
+        //using getJSON method to request data file and issue callback function
         $.getJSON("ky_counties_housing.json", function(data) {
             
+            //styling data layer
             dataLayer = L.geoJson(data, {
                  style: function(feature) {
                     return {
@@ -152,12 +154,17 @@
                             fillOpacity: 1,
                             fillColor: '#1f78b4'
                         };
-                }          
+                }
+            //adding styled data layer to map    
             }).addTo(map);
             
+            //calling ui function
             ui();
+            //calling drawLegend function
             drawLegend();
+            //calling drawMap function
             drawMap();
+            //calling drawInfo function
             drawInfo();
 
               
