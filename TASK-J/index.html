@@ -99,9 +99,9 @@
     <div id='ui-controls'>
      <label>Choose a data attribute:<br>
         <select name="occupied">
-            <option value="OWNED_MORT" selected>owned with mortgage</option>
-            <option value="OWNED_FREE">owned free and clear</option> 
-            <option value="RENTER">rented</option>
+            <option value="VACANT_FO2" selected>vacant for sale</option>
+            <option value="VACANT_SEA">vacant used seasonally/recreationally</option> 
+            <option value="VACANT_MIG">vacant used for migrant workers</option>
         </select>
         </label>
     </div>
@@ -130,14 +130,14 @@
         // Begin module 13 code here
         
         var dataLayer,
-            attribute = "OWNED_MORT",
-            norm = "OCCUPIED";
+            attribute = "VACANT_MIG",
+            norm = "VACANT";
         
         var labels = {
-                "OCCUPIED": "occupied units",
-                "OWNED_MORT": "% occupied housing units owned with mortgage",
-                "OWNED_FREE": "% occupied housing units owned free and clear",
-                "RENTER": "% occupied housing units rented"   
+                "VACANT": "total vacant properties",
+                "VACANT_FO2": "% vacant properties for sale",
+                "VACANT_SEA": "% vacant properties used seasonally/recreationally",
+                "VACANT_MIG": "% vacant properties used for migrant workers",  
         };
         
         $.getJSON("ky_counties_housing.json", function(data) {
@@ -277,10 +277,10 @@
             var props = layer.feature.properties;
 
             var html = "<h3>"+props['NAME']+" County</h3>"+
-                    "total # occupied units: <b>"+ props["OCCUPIED"]+"</b><br>"+
-                    "# owned with mortgage or loan: <b>"+ props["OWNED_MORT"]+"</b><br>"+
-                    "# owned free and clear: <b>"+ props["OWNED_FREE"]+"</b><br>"+
-                    "# occupied by renters: <b>"+ props["RENTER"]+"</b>"
+                    "total # vacant properties: <b>"+ props["VACANT"]+"</b><br>"+
+                    "# vacant properties for sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
+                    "# vacant properties used recreationally/seasonally: <b>"+ props["VACANT_SEA"]+"</b><br>"+
+                    "# vacant properties used for migrant workers: <b>"+ props["VACANT_MIG"]+"</b>"
 
             $(".info").html(html);
         }
