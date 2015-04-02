@@ -85,6 +85,16 @@
         // AJAX requests to load data files
         $.getJSON("us-states.json", function (states){
             
+            Papa.parse('states-unemployment.csv', {
+                download: true, 
+                header: true,
+                complete: function (data) {
+                    //data is accessible here
+                    console.log(data);                    
+                    processData(states, data);
+                }
+            });
+            
             //states is accessible here
             
         })
@@ -94,6 +104,8 @@
         });
  
         // function to process/bind data
+        function processData(states, data) {
+        }
 
         // function to draw the map
         
