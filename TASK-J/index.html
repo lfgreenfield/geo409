@@ -209,24 +209,31 @@
                 var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
                     values.push(value);   
                 
-                //creating action for user mouseover and mouseout; purpose: visual affordance while maintaining normalized color value
+                //creating action for user mouseover; purpose: visual affordance while maintaining normalized color value
                 layer.on('mouseover', function() {
                     
+                    //creating variable props to get proper fill color and save space
                     var props = layer.feature.properties;
                     
+                    //setting style for mouseover event
                     layer.setStyle({
                         fillColor: getColor(props[attribute]/props[norm], breaks),
                         color: 'yellow',
-                        weight: 6
+                        weight: 6,
+                        opacity: 2
                     });
                     
+                    //calling function updateInfo in order to populate info box during mouseover event
                     updateInfo(this);
                 });
                 
+                //creating action for user mouseout; purpose: return styling to normal when mouseover event ends
                 layer.on('mouseout', function () {
                     
+                    //creating variable props to get proper fill color and save space
                     var props = layer.feature.properties;
                     
+                    //setting style for mouseout, i.e. returning the style to normal, normalized color value
                     layer.setStyle({
                         fillColor: getColor(props[attribute]/
                                         props[norm], breaks),
