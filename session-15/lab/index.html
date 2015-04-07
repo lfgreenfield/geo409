@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.0/papaparse.min.js"></script>
+    <script src="simple_statistics.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -70,6 +71,10 @@
         }
         var map = L.map('map', options);
         
+        var dataLayer,
+             attribute = '2002';
+             
+        
         // load map tiles and add to map
          var tiles = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
              attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
@@ -90,7 +95,7 @@
                 header: true,
                 complete: function (data) {
                     //data is accessible here
-                    console.log(data);                    
+//                    console.log(data);                    
                     processData(states, data);
                 }
             });
@@ -105,15 +110,99 @@
  
         // function to process/bind data
         function processData(states, data) {
+            
+            for (var state in states.features) {
+
+                var props = states.features[state].properties;
+
+//                    console.log(props.StateFP);
+
+                for(var d in data.data) {
+
+//                    console.log(data.data[d].STATE_FIP);
+                     if(props.STATEFP == data.data[d].STATE_FIP) {
+                        states.features[state].properties = data.data[d]; 
+                            break;
+                      }  
+                }
+            }
+            console.log(states);//STATES DATA IS NOW JOINED TO CSV DATA
+            
+            drawMap(states)
+            
         }
 
         // function to draw the map
+        function drawMap(states) {
+          
+            dataLayer = L.geoJson(states, {
+              style: function(feature) {
+                  return {
+                      color: '#dddddd',
+                      weight: 2,
+                      fillOpacity: 1,
+                      fillColor: '#1f78b4'
+                  };
+              }
+            }).addTo(map);
+            
+            updateMap();
+        
+        }
         
         // function to update the map
+        function updateMap() {
+            
+            var breaks = getClassBreaks();
+            
+            dataLayer.eachLayer(function(layer) {
+                
+                layer.setStyle({                                        
+                    fillColor: getColor(Number(layer.feature.properties[attribute]), breaks)
+                });
+
         
-        // function get the class breaks   
+            })
+        }
+        
+//         function get the class breaks 
+        function getClassBreaks() {
+
+             var values = [];
+             
+             dataLayer.eachLayer(function(layer) {
+//                 console.log(layer.feature.properties[attribute]);
+                 var value = layer.feature.properties[attribute];
+                 values.push(Number(value)); // push the normalized value for each layer into the Array
+             });
+            
+             var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
+                return breaks; // return Array of class breaks
+            
+            console.log(breaks);
+            
+         }
+
         
         // function to get the color value
+            function getColor (d, breaks) {
+                
+                if(d <= breaks[0]) {
+                    return '#c7e9b4';
+                } else if(d <= breaks[1]) {
+                    return '#7fcdbb';
+                } else if(d <= breaks[2]) {
+                    return '#41b6c4';
+                } else if(d <= breaks[3]) {
+                    return '#1d91c0'
+                } else if(d <= breaks[4]) {
+                    return '#225ea8'
+                } else if(d <= breaks[5]) {
+                    return '#0c2c84'
+                }
+                
+                
+            }
                 
         // function to draw the legend
         
