@@ -147,6 +147,7 @@
             }).addTo(map);
             
             updateMap();
+            drawLegend();
         
         }
         
@@ -163,6 +164,8 @@
 
         
             })
+            
+            updateLegend(breaks);
         }
         
 //         function get the class breaks 
@@ -178,8 +181,6 @@
             
              var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
                 return breaks; // return Array of class breaks
-            
-            console.log(breaks);
             
          }
 
@@ -205,8 +206,37 @@
             }
                 
         // function to draw the legend
+        function drawLegend() {
+            
+            var legend = L.control({position: 'topleft'});
+            
+            legend.onAdd = function(map) {
+                
+                var div = L.DomUtil.create('div', 'legend');
+               
+                return div;
+            };
+           
+            legend.addTo(map);
+        }
+        
         
         // function to update the legend
+        function updateLegend(breaks) {
+             
+            var legend = $('.legend').html("<h3>" + [attribute] + "</h3><ul>");
+            
+            for (var i = 0; i < breaks.length-1; i++) {
+                
+                var color = getColor(breaks[i + 1], breaks);
+                
+                legend.append('<li><span style="background:' + color + '"></span> ' +
+                            (breaks[i]*100).toLocaleString() + ' &mdash; ' +
+                              (breaks[i + 1]*100).toLocaleString() + '</li>');
+            }
+            
+            legend.append("</ul>");
+        }
 
         // function to create the range slider
 
