@@ -114,8 +114,8 @@
 -->
     
         <label><span class="min">2001</span><span class="max">2013</span>
-            <input type="range" min = "2001", max= "2013", 
-               value = "2001", step= "1", class="year-slider"></input>
+            <input type="range" min = "2000", max= "2013", 
+               value = "2000", step= "1", class="year-slider"></input>
         </label>
 
     </div>
@@ -133,7 +133,7 @@
         var map = L.map('map', options);
         
         var dataLayer,
-             attribute = '2001';
+             attribute = '2000';
              
         
         // load map tiles and add to map
@@ -149,9 +149,9 @@
         // declare global variables
 
         // AJAX requests to load data files
-        $.getJSON("us-states.json", function (states){
+        $.getJSON("ky-counties.json", function (states){
             
-            Papa.parse('states-unemployment.csv', {
+            Papa.parse('ky-unemployment-data.csv', {
                 download: true, 
                 header: true,
                 complete: function (data) {
