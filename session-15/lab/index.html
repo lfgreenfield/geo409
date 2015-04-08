@@ -76,7 +76,18 @@
             height: 20px;
             float: left;
             margin-right: 10px;
-        }        
+        }
+        #ui-controls {
+            width: 176px;   
+            padding: 8px 15px 8px 15px;
+            background: rgba(75,75,75,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px; 
+            color: whitesmoke;
+        }
+        .year-slider {
+            width: 100%;
+        }
         
     </style>
 </head>
@@ -277,7 +288,29 @@
         }
 
         // function to create the range slider
-        function createSliderUI(){}
+        function createSliderUI(){
+            
+            var sliderControl = L.control({ position: 'bottomleft'} );
+
+            sliderControl.onAdd = function(map) {
+
+                    // select an existing DOM element with an id of "ui-controls"
+                    var slider = L.DomUtil.get("ui-controls");
+
+                    L.DomEvent.addListener(slider, 'mousedown', function(e) { 
+
+                    L.DomEvent.stopPropagation(e); 
+
+            });
+
+            return slider;
+        }
+
+        sliderControl.addTo(map);
+        
+        }
+        
+        
 
     </script>
     
