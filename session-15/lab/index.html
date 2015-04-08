@@ -88,18 +88,36 @@
         .year-slider {
             width: 100%;
         }
+        #ui-controls .min {
+            float: left;   
+        }
+        #ui-controls .max {
+            float: right;
+        }
+        label {
+        font-size: 1.1em;
+        font-weight: bold;
+        }
         
     </style>
 </head>
 
 <body>
-    <h1>Map Title Goes Here</h1>
+    <h1>US Unemployment Rates: 2001-2013</h1>
     
     <div id='map'></div>
     
     <div id="ui-controls">
+<!--
         <input type="range" min="2001", max="2013", 
                 value="2001", step="1" class="year-slider"></input>
+-->
+    
+        <label><span class="min">2001</span><span class="max">2013</span>
+            <input type="range" min = "2001", max= "2013", 
+               value = "2001", step= "1", class="year-slider"></input>
+        </label>
+
     </div>
     
     <script>
@@ -310,6 +328,13 @@
         
         }
         
+        $(".year-slider")
+            .on('input change', function() {
+                attribute = $(this).val();
+            
+                updateMap();
+            
+        });
         
 
     </script>
