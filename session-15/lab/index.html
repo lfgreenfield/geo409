@@ -174,7 +174,8 @@
             }).addTo(map);
             
             drawLegend();
-            updateMap();       
+            updateMap();
+            createSliderUI();
         
         }
         
@@ -258,17 +259,20 @@
             
             for (var i = 0; i < breaks.length-1; i++) {
                 
-                var color = getColor(breaks[i + 1], breaks);
+                var color = getColor(breaks[i], breaks);
+                
+                console.log(breaks[i + 1]);
                 
                 legend.append('<li><span style="background:' + color + '"></span> ' +
-                            (breaks[i]*100).toLocaleString() + ' &mdash; ' +
-                              (breaks[i + 1]*100).toLocaleString() + '</li>');
+                            (breaks[i]).toLocaleString() + ' &mdash; ' +
+                              (breaks[i + 1]).toLocaleString() + "%" + '</li>');
             }
             
             legend.append("</ul>");
         }
 
         // function to create the range slider
+        function createSliderUI(){}
 
     </script>
     
