@@ -86,6 +86,11 @@
     
     <div id='map'></div>
     
+    <div id="ui-controls">
+        <input type="range" min="2001", max="2013", 
+                value="2001", step="1" class="year-slider"></input>
+    </div>
+    
     <script>
         
         var options = {
@@ -99,7 +104,7 @@
         var map = L.map('map', options);
         
         var dataLayer,
-             attribute = '2002';
+             attribute = '2001';
              
         
         // load map tiles and add to map
@@ -193,7 +198,7 @@
         
             })
             
-            console.log(breaks);
+//            console.log(breaks);
             updateLegend(breaks);
         }
         
@@ -253,7 +258,7 @@
         // function to update the legend
         function updateLegend(breaks) {
             
-            console.log(breaks);
+//            console.log(breaks);
              
             var legend = $('.legend').html("<h3>" + [attribute] + "</h3><ul>");
             
@@ -261,7 +266,7 @@
                 
                 var color = getColor(breaks[i], breaks);
                 
-                console.log(breaks[i + 1]);
+//                    console.log(breaks[i + 1]);
                 
                 legend.append('<li><span style="background:' + color + '"></span> ' +
                             (breaks[i]).toLocaleString() + ' &mdash; ' +
