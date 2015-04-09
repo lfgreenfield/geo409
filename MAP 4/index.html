@@ -234,7 +234,7 @@
              var values = [];
              
              dataLayer.eachLayer(function(layer) {
-//                 console.log(layer.feature.properties[attribute]);
+
                  var value = layer.feature.properties[attribute];
                  values.push(Number(value)); // push the normalized value for each layer into the Array
              });
@@ -242,11 +242,16 @@
              var breaks = ss.jenks(values, 6);
                 return breaks; // return Array of class breaks
             
+    
+            
          }
 
         
         // function to get the color value
             function getColor (d, breaks) {
+                
+//                console.log(breaks); //breaks accessible here
+                //[2.7, 3.8, 4.6, 5.4, 6.4, 7.8, 10.5]
                 
                 if(d <= breaks[0]) {
                     return '#c7e9b4';
@@ -292,11 +297,9 @@
                 
                 var color = getColor(breaks[i], breaks);
                 
-//                    console.log(breaks[i + 1]);
-                
                 legend.append('<li><span style="background:' + color + '"></span> ' +
                             (breaks[i]).toLocaleString() + ' &mdash; ' +
-                              (breaks[i + 1]).toLocaleString() + "%" + '</li>');
+                              (breaks[i+1]).toLocaleString() + "%" + '</li>');
             }
             
             legend.append("</ul>");
