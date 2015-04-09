@@ -206,9 +206,10 @@
               }
             }).addTo(map);
             
+            createSliderUI();
             drawLegend();
             updateMap();
-            createSliderUI();
+            drawInfo();
         
         }
         
@@ -254,7 +255,7 @@
                     }).bringToFront;
                     
                     //calling function updateInfo in order to populate info box during mouseover event
-//                    updateInfo(this);
+                    updateInfo(this);
                 });
                 
                 //creating action for user mouseout; purpose: return styling to normal when mouseover event ends
@@ -363,6 +364,39 @@
         sliderControl.addTo(map);
         
         }
+        
+        function drawInfo() {
+            
+            //creating leafleft control object and positioning top-right
+            var info = L.control({position: 'bottomright'});
+            //actions for when info panel is added to map
+            info.onAdd = function(map) {
+                //creating new div element
+                var div = L.DomUtil.create('div', 'info');
+                    return div;    
+            }
+            
+        info.addTo(map);
+            
+        $(".info").hide();  
+            
+        }
+        
+         //function to insert conent into new info div element
+        function updateInfo(layer) {
+            //creating variable to save space and call attributes
+            var props = layer.feature.properties;
+           //variable containing concatenated string info
+            var html = "<h3>"+props['NAME']+" County</h3>"+
+                    "2000: <b>"+ props["2000"]+"</b><br>"+
+                    "2001: <b>"+ props["2001"]+"</b><br>"+
+                    "2002: <b>"+ props["2002"]+"</b><br>"+
+    
+            //selecting the div class and adding the html info
+            $(".info").html(html);
+        }
+        
+        
         
         $(".year-slider")
             .on('input change', function() {
