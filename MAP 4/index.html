@@ -225,7 +225,7 @@
             createSliderUI();
             drawLegend();
             updateMap();
-            drawInfo();
+           // drawInfo();
         
         }
         
@@ -239,30 +239,9 @@
             dataLayer.eachLayer(function(layer) {
                 
                 layer.setStyle({                                        
-                    fillColor: getColor(Number(layer.feature.properties[2000]), breaks)
+                    fillColor: getColor(Number(layer.feature.properties[attribute]), breaks)
                 });
-        
-            })
-            
-            //calling updateLegend function, passing 'breaks' through it
-            updateLegend(breaks);
-        }
-        
-//         function get the class breaks 
-        function getClassBreaks() {
-
-             //creating empty array
-             var values = [];
-             
-             //for every layer...
-             dataLayer.eachLayer(function(layer) {
-
-                 //shorthand variable
-                 var value = layer.feature.properties[attribute];
-                 
-                 //pushing all values into 'value' array
-                 values.push(Number(value)); // push the normalized value for each layer into the Array
-                 
+                
                  //for when user mouses-over
                  layer.on('mouseover', function() {
                     
@@ -271,7 +250,6 @@
                     
                     //setting style for mouseover event
                     layer.setStyle({
-//                        fillColor: getColor(props[attribute], breaks),
                         fillColor: 'yellow',
                         fillOpacity: 0.6,
                         color: 'yellow',
@@ -316,19 +294,45 @@
                 var content = "<b>"+props.NAME+" County</b><br>"+ [attribute] +" unemployment rate: " +props[attribute]+"%"
                 
                 //binding popup to layer, adding to map when user clicks on county
-                layer.bindPopup(content).addTo(map);;
+                layer.bindPopup(content).addTo(map);
+                
+                
+        
+            })
+            
+            //calling updateLegend function, passing 'breaks' through it
+            updateLegend(breaks);
+        }
+        
+//         function get the class breaks 
+        function getClassBreaks() {
+
+             //creating empty array
+             var values = [];
+             
+             //for every layer...
+             dataLayer.eachLayer(function(layer) {
+
+                 //shorthand variable
+                 var value = layer.feature.properties[attribute];
+                 
+                 //pushing all values into 'value' array
+                 values.push(Number(value)); // push the normalized value for each layer into the Array
+                 
+                
                     
              });
             
              //setting breaks...MAY BE PROBLEM HERE
              var breaks = ss.jenks(values, 6);
+            
                 return breaks; // return Array of class breaks
             
          }
 
         
         // function to get the color value...ISSUE HERE, TOO
-            function getColor (d, breaks) {
+         function getColor (d, breaks) {
                 
                 //different colors for the different breaks
                 if(d <= breaks[0]) {
@@ -371,12 +375,16 @@
         
         // function to update the legend
         function updateLegend(breaks) {
+            
+//            console.log(breaks);
              
             //header for legend
-            var legend = $('.legend').html("<h3>" + [attribute] + "</h3><ul>");
+            var legend = $('.legend').html("<h3>" + "% Unemployment: "+ [attribute] +  "</h3><ul>");
             
             //looping through to get correct breaks and corresponding colors
             for (var i = 0; i < breaks.length-1; i++) {
+                
+               //console.log(breaks);
                 
                 //referring to getColor function
                 var color = getColor(breaks[i], breaks);
@@ -405,15 +413,28 @@
                     //what happens when user slides across the control
                     L.DomEvent.addListener(slider, 'mousedown', function(e) { 
 
-                    L.DomEvent.stopPropagation(e); 
+                        L.DomEvent.stopPropagation(e);
+                        
+                       
+
+                    });
+                 return slider;
+            }
+                
+            //adding slider control to map
+                sliderControl.addTo(map);
+                        
+            //JQUERY for actions whenever the user uses the slider, then updates map
+            $(".year-slider")
+                .on('input change', function() {
+                    attribute = $(this).val();
+
+                    updateMap();
 
             });
 
-            return slider;
-        }
 
-        //adding slider control to map
-        sliderControl.addTo(map);
+
         
         }
         
@@ -422,42 +443,45 @@
             
             //creating leafleft control object and positioning top-right
             var info = L.control({position: 'bottomright'});
+            
             //actions for when info panel is added to map
             info.onAdd = function(map) {
-//                console.log("here");
+
+                
                 //creating new div element
                 var div = L.DomUtil.create('div', 'info');
+                
                     return div;    
             }
             
-        info.addTo(map);
-            
-        $(".info").hide();  
+            info.addTo(map);
+
+            $(".info").hide();  
             
         }
         
          //function to insert content into new info div element..ISSUES PROBABLY
         function updateInfo(layer) {
+            
             //creating variable to save space and call attributes
-            var props = layer.feature.properties;
+//            var props = layer.feature.properties[attribute];
+            
+            var props = layer.feature; 
+            
+            console.log(props);
+            
            //variable containing concatenated string info
-            var html = "<h3>"+props['NAME']+" County</h3>"+
-                    "2000: <b>"+ props["2000"]+"</b><br>"+
-                    "2001: <b>"+ props["2001"]+"</b><br>"+
-                    "2002: <b>"+ props["2002"]+"</b><br>"+
+            var html = "<h3>"+props.properties['NAME']+" County</h3>"+
+                    "2000: <b>"+ props.properties["2000"]+"</b><br>"+
+                    "2001: <b>"+ props.properties["2001"]+"</b><br>"+
+                    "2002: <b>"+ props.properties["2002"]+"</b><br>"+
     
             //selecting the div class and adding the html info
             $(".info").html(html);
+            
+            console.log(html);
         }
-        
-        //JQUERY for actions whenever the user uses the slider, then updates map
-        $(".year-slider")
-            .on('input change', function() {
-                attribute = $(this).val();
-            
-                updateMap();
-            
-        });
+
         
 
     </script>
