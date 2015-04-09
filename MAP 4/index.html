@@ -95,19 +95,27 @@
             float: right;
         }
         label {
-        font-size: 1.1em;
-        font-weight: bold;
+            font-size: 1.1em;
+            font-weight: bold;
         }
         .info {
-        padding: 6px 8px;
-        font-size: 1em;
-        background: rgba(255,255,255,0.8);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-        text-align: right;   
+            padding: 6px 8px;
+            font-size: 1em;
+            background: rgba(75,75,75,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            text-align: right; 
+            color: whitesmoke;
+            height: 275px;
         }
         .info h3 {
-        margin: 0;   
+            margin: 0;   
+        }
+        .info span {
+            width: 30px;
+            height: 50px;
+            float: left;
+            margin-right: 10px;
         }
         
     </style>
@@ -470,7 +478,7 @@
             
             var props = layer.feature; 
             
-            console.log(props);
+//            console.log(props);
             
            //variable containing concatenated string info
             var html = "<h3>"+props.properties['NAME']+" County</h3>"+
@@ -478,21 +486,20 @@
                     "2001: <b>"+ props.properties["2001"]+"</b><br>"+
                     "2002: <b>"+ props.properties["2002"]+"</b><br>"+
                     "2003: <b>"+ props.properties["2003"]+"</b><br>"+
-                    "2004: <b>"+ props.properties["2004"]+"</b><br>"
-                    "2005: <b>"+ props.properties["2005"]+"</b><br>"
-                    "2006: <b>"+ props.properties["2006"]+"</b><br>"
-                    "2007: <b>"+ props.properties["2007"]+"</b><br>"
-                    "2008: <b>"+ props.properties["2008"]+"</b><br>"
-                    "2009: <b>"+ props.properties["2009"]+"</b><br>"
-                    "2010: <b>"+ props.properties["2010"]+"</b><br>"
-                    "2011: <b>"+ props.properties["2011"]+"</b><br>"
-                    "2012: <b>"+ props.properties["2012"]+"</b><br>"
+                    "2004: <b>"+ props.properties["2004"]+"</b><br>"+
+                    "2005: <b>"+ props.properties["2005"]+"</b><br>"+
+                    "2006: <b>"+ props.properties["2006"]+"</b><br>"+
+                    "2007: <b>"+ props.properties["2007"]+"</b><br>"+
+                    "2008: <b>"+ props.properties["2008"]+"</b><br>"+
+                    "2009: <b>"+ props.properties["2009"]+"</b><br>"+
+                    "2010: <b>"+ props.properties["2010"]+"</b><br>"+
+                    "2011: <b>"+ props.properties["2011"]+"</b><br>"+
+                    "2012: <b>"+ props.properties["2012"]+"</b><br>"+
                     "2013: <b>"+ props.properties["2013"]+"</b><br>"
     
             //selecting the div class and adding the html info
             $(".info").html(html);
-            
-            console.log(html);
+
         }
 
         
