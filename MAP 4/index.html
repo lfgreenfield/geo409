@@ -239,7 +239,7 @@
                  values.push(Number(value)); // push the normalized value for each layer into the Array
              });
             
-             var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
+             var breaks = ss.jenks(values, 6);
                 return breaks; // return Array of class breaks
             
          }
@@ -260,10 +260,12 @@
                     return '#225ea8'
                 } else if(d <= breaks[5]) {
                     return '#0c2c84'
+                } else if(d <= breaks[6]) {
+                    return '#00001F'
                 }
-                
-                
+            
             }
+        
                 
         // function to draw the legend
         function drawLegend() {
