@@ -98,6 +98,17 @@
         font-size: 1.1em;
         font-weight: bold;
         }
+        .info {
+        padding: 6px 8px;
+        font-size: 1em;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+        text-align: right;   
+        }
+        .info h3 {
+        margin: 0;   
+        }
         
     </style>
 </head>
@@ -272,10 +283,17 @@
                         fillOpacity: 1
                     });
                 }); 
- 
                  
-                 
-                 
+                   // when mousing over the map
+                layer.on('mouseover', function() {
+                    $(".info").show(); // display the info panel
+                });
+                
+                // when mousing off the map
+                dataLayer.on('mouseout', function() {
+                    $(".info").hide(); // hide the info panel
+                });
+                    
              });
             
              var breaks = ss.jenks(values, 6);
@@ -371,6 +389,7 @@
             var info = L.control({position: 'bottomright'});
             //actions for when info panel is added to map
             info.onAdd = function(map) {
+//                console.log("here");
                 //creating new div element
                 var div = L.DomUtil.create('div', 'info');
                     return div;    
@@ -382,7 +401,7 @@
             
         }
         
-         //function to insert conent into new info div element
+         //function to insert content into new info div element
         function updateInfo(layer) {
             //creating variable to save space and call attributes
             var props = layer.feature.properties;
