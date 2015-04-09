@@ -248,6 +248,7 @@
              dataLayer.eachLayer(function(layer) {
 
                  var value = layer.feature.properties[attribute];
+                 
                  values.push(Number(value)); // push the normalized value for each layer into the Array
                  
                  layer.on('mouseover', function() {
@@ -293,6 +294,14 @@
                 dataLayer.on('mouseout', function() {
                     $(".info").hide(); // hide the info panel
                 });
+                 
+                 
+               var props = layer.feature.properties;
+               
+               var content = "<b>"+props.NAME+"</b><br>"+
+                    props[attribute]+"%<br><b>"+
+                
+                layer.bindPopup(content);
                     
              });
             
