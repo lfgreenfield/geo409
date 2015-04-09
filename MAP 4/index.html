@@ -155,7 +155,7 @@
                 complete: function (data) {
                     
                     //data is accessible here
-                   // console.log(data);  THIS IS UNEMPLOYMENT DATA                 
+                    console.log(data);                 
                     processData(counties, data);
                 }
             });
@@ -188,7 +188,8 @@
                       }  
                 }
             }
-//            console.log(counties);//STATES DATA IS NOW JOINED TO CSV DATA
+            console.log(counties);
+            //STATES DATA IS NOW JOINED TO CSV DATA
             
             drawMap(counties);
             
@@ -208,7 +209,7 @@
               }
             }).addTo(map);
             
-//            drawLegend();
+            drawLegend();
 //            updateMap();
 //            createSliderUI();
         
