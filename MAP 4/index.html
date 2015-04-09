@@ -225,7 +225,7 @@
             createSliderUI();
             drawLegend();
             updateMap();
-           // drawInfo();
+            drawInfo();
         
         }
         
@@ -441,6 +441,8 @@
         //function to draw the info panel....ISSUES RESIDE HERE
         function drawInfo() {
             
+            console.log("here");
+            
             //creating leafleft control object and positioning top-right
             var info = L.control({position: 'bottomright'});
             
@@ -475,6 +477,17 @@
                     "2000: <b>"+ props.properties["2000"]+"</b><br>"+
                     "2001: <b>"+ props.properties["2001"]+"</b><br>"+
                     "2002: <b>"+ props.properties["2002"]+"</b><br>"+
+                    "2003: <b>"+ props.properties["2003"]+"</b><br>"+
+                    "2004: <b>"+ props.properties["2004"]+"</b><br>"
+                    "2005: <b>"+ props.properties["2005"]+"</b><br>"
+                    "2006: <b>"+ props.properties["2006"]+"</b><br>"
+                    "2007: <b>"+ props.properties["2007"]+"</b><br>"
+                    "2008: <b>"+ props.properties["2008"]+"</b><br>"
+                    "2009: <b>"+ props.properties["2009"]+"</b><br>"
+                    "2010: <b>"+ props.properties["2010"]+"</b><br>"
+                    "2011: <b>"+ props.properties["2011"]+"</b><br>"
+                    "2012: <b>"+ props.properties["2012"]+"</b><br>"
+                    "2013: <b>"+ props.properties["2013"]+"</b><br>"
     
             //selecting the div class and adding the html info
             $(".info").html(html);
