@@ -237,12 +237,48 @@
 
                  var value = layer.feature.properties[attribute];
                  values.push(Number(value)); // push the normalized value for each layer into the Array
+                 
+                 layer.on('mouseover', function() {
+                    
+                    //creating variable props to get proper fill color and save space
+                    var props = layer.feature.properties;
+                    
+                    //setting style for mouseover event
+                    layer.setStyle({
+//                        fillColor: getColor(props[attribute], breaks),
+                        fillColor: 'yellow',
+                        fillOpacity: 0.6,
+                        color: 'yellow',
+                        weight: 1.5,
+                        opacity: 2
+                    }).bringToFront;
+                    
+                    //calling function updateInfo in order to populate info box during mouseover event
+//                    updateInfo(this);
+                });
+                
+                //creating action for user mouseout; purpose: return styling to normal when mouseover event ends
+                layer.on('mouseout', function () {
+                    
+                    //creating variable props to get proper fill color and save space
+                    var props = layer.feature.properties;
+                    
+                    //setting style for mouseout, i.e. returning the style to normal, normalized color value
+                    layer.setStyle({
+                        fillColor: getColor(props[attribute], breaks),
+                        color: '#dddddd',
+                        weight: 2,
+                        fillOpacity: 1
+                    });
+                }); 
+ 
+                 
+                 
+                 
              });
             
              var breaks = ss.jenks(values, 6);
                 return breaks; // return Array of class breaks
-            
-    
             
          }
 
