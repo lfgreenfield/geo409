@@ -154,14 +154,14 @@
                 header: true,
                 complete: function (data) {
                     
-                    //data is accessible here
+                    //unemployment data is accessible here
                     console.log(data);                 
                     processData(counties, data);
                 }
             });
             
             //console.log(counties); THIS IS GEOMETRY/NAME PROPS
-            //states is accessible here
+            //counties is accessible here
             
         })
         .fail(function() {
@@ -177,6 +177,8 @@
                 var props = counties.features[county].properties;
 
 //                    console.log(props.COUNTY_FIP);
+                console.log(data);
+                console.log(data.data[d].CNTY);
 
                 for(var d in data.data) {
 
