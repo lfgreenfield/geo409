@@ -298,10 +298,11 @@
                  
                var props = layer.feature.properties;
                
-               var content = "<b>"+props.NAME+"</b><br>"+
-                    props[attribute]+"%<br><b>"+
+               
+//               <br>"+
+//                    props[attribute]+"%<br></br>"+
                 
-                layer.bindPopup(content);
+                layer.bindPopup(content).addTo(map);;
                     
              });
             
