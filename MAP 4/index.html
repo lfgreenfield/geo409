@@ -313,7 +313,7 @@
                 var props = layer.feature.properties;
                
                 //building content for popup
-                var content = "<b>"+props.NAME+" County</b><br>"+ props[attribute]+"%"
+                var content = "<b>"+props.NAME+" County</b><br>"+ [attribute] +" unemployment rate: " +props[attribute]+"%"
                 
                 //binding popup to layer, adding to map when user clicks on county
                 layer.bindPopup(content).addTo(map);;
