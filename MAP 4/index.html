@@ -149,14 +149,14 @@
         // AJAX requests to load data files
         $.getJSON("ky-counties.json", function (counties){
             
-            console.log(counties);
+//            console.log(counties);
             
             Papa.parse('ky-unemployment-data.csv', {
                 download: true, 
                 header: true,
                 complete: function (data) {
                     
-                    console.log(data);
+//                    console.log(data);
                                 
                     processData(counties, data);
                 }
@@ -186,7 +186,7 @@
             }
             
             console.log(counties);
-            //STATES DATA IS NOW JOINED TO CSV DATA
+            //COUNTIES DATA IS NOW JOINED TO CSV DATA
             
             drawMap(counties);
             
@@ -207,8 +207,8 @@
             }).addTo(map);
             
             drawLegend();
-//            updateMap();
-//            createSliderUI();
+            updateMap();
+            createSliderUI();
         
         }
         
@@ -220,16 +220,12 @@
             dataLayer.eachLayer(function(layer) {
                 
                 layer.setStyle({                                        
-                    fillColor: getColor(Number(layer.feature.properties[2001]), breaks)
+                    fillColor: getColor(Number(layer.feature.properties[2000]), breaks)
                 });
-                
-//                console.log(layer.feature.properties[attribute]);
-
         
             })
             
-//            console.log(breaks);
-//            updateLegend(breaks);
+            updateLegend(breaks);
         }
         
 //         function get the class breaks 
@@ -287,8 +283,6 @@
         
         // function to update the legend
         function updateLegend(breaks) {
-            
-//            console.log(breaks);
              
             var legend = $('.legend').html("<h3>" + [attribute] + "</h3><ul>");
             
