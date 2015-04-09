@@ -155,13 +155,13 @@
         
         map.addLayer(tiles);
                 
-        // declare global variables
 
         // AJAX requests to load data files
         $.getJSON("ky-counties.json", function (counties){
             
 //            console.log(counties);
             
+            //converting csv to json
             Papa.parse('ky-unemployment-data.csv', {
                 download: true, 
                 header: true,
@@ -169,6 +169,7 @@
                     
 //                    console.log(data);
                                 
+                    //calling functions processData, passing 'counties' and 'data' to it so they can be joined
                     processData(counties, data);
                 }
             });
@@ -182,6 +183,7 @@
         // function to process/bind data
         function processData(counties, data) {
             
+            //loop to join 'counties' and 'data', both are being read as jsons at this point 
             for (var county in counties.features) {
 
                 var props = counties.features[county].properties;
@@ -199,6 +201,7 @@
             console.log(counties);
             //COUNTIES DATA IS NOW JOINED TO CSV DATA
             
+            //calls drawMap function, passes 'counties' data to it
             drawMap(counties);
             
         }
@@ -206,6 +209,7 @@
         // function to draw the map
         function drawMap(counties) {
           
+            //gets counties (geography) data onto map
             dataLayer = L.geoJson(counties, {
               style: function(feature) {
                   return {
@@ -217,6 +221,7 @@
               }
             }).addTo(map);
             
+            //calling funtions to get this map started
             createSliderUI();
             drawLegend();
             updateMap();
@@ -227,8 +232,10 @@
         // function to update the map
         function updateMap() {
             
+            //variable + calling function getClassbreaks
             var breaks = getClassBreaks();
             
+            //on each layer
             dataLayer.eachLayer(function(layer) {
                 
                 layer.setStyle({                                        
@@ -237,23 +244,29 @@
         
             })
             
+            //calling updateLegend function, passing 'breaks' through it
             updateLegend(breaks);
         }
         
 //         function get the class breaks 
         function getClassBreaks() {
 
+             //creating empty array
              var values = [];
              
+             //for every layer...
              dataLayer.eachLayer(function(layer) {
 
+                 //shorthand variable
                  var value = layer.feature.properties[attribute];
                  
+                 //pushing all values into 'value' array
                  values.push(Number(value)); // push the normalized value for each layer into the Array
                  
+                 //for when user mouses-over
                  layer.on('mouseover', function() {
                     
-                    //creating variable props to get proper fill color and save space
+                    //shorthand variable
                     var props = layer.feature.properties;
                     
                     //setting style for mouseover event
@@ -270,10 +283,10 @@
                     updateInfo(this);
                 });
                 
-                //creating action for user mouseout; purpose: return styling to normal when mouseover event ends
+                //for when user mouses-off
                 layer.on('mouseout', function () {
                     
-                    //creating variable props to get proper fill color and save space
+                    //shorthand variable
                     var props = layer.feature.properties;
                     
                     //setting style for mouseout, i.e. returning the style to normal, normalized color value
@@ -285,39 +298,39 @@
                     });
                 }); 
                  
-                   // when mousing over the map
+                // when mousing over each layer...?
                 layer.on('mouseover', function() {
-                    $(".info").show(); // display the info panel
+                    $(".info").show(); // display the info panel..ISN'T CURRENTLY WORKING
                 });
                 
-                // when mousing off the map
-                dataLayer.on('mouseout', function() {
-                    $(".info").hide(); // hide the info panel
+//                 when mousing off each layer...?
+                layer.on('mouseout', function() {
+                    $(".info").hide(); // hide the info panel...ISN'T CURRENTLY WORKING
                 });
                  
                  
-               var props = layer.feature.properties;
+                //shorthand variable
+                var props = layer.feature.properties;
                
-               
-//               <br>"+
-//                    props[attribute]+"%<br></br>"+
+                //building content for popup
+                var content = "<b>"+props.NAME+" County</b><br>"+ props[attribute]+"%"
                 
+                //binding popup to layer, adding to map when user clicks on county
                 layer.bindPopup(content).addTo(map);;
                     
              });
             
+             //setting breaks...MAY BE PROBLEM HERE
              var breaks = ss.jenks(values, 6);
                 return breaks; // return Array of class breaks
             
          }
 
         
-        // function to get the color value
+        // function to get the color value...ISSUE HERE, TOO
             function getColor (d, breaks) {
                 
-//                console.log(breaks); //breaks accessible here
-                //[2.7, 3.8, 4.6, 5.4, 6.4, 7.8, 10.5]
-                
+                //different colors for the different breaks
                 if(d <= breaks[0]) {
                     return '#c7e9b4';
                 } else if(d <= breaks[1]) {
@@ -340,8 +353,10 @@
         // function to draw the legend
         function drawLegend() {
             
+            //set control position
             var legend = L.control({position: 'topright'});
             
+            //cues for when legend is adding to map: div created
             legend.onAdd = function(map) {
                 
                 var div = L.DomUtil.create('div', 'legend');
@@ -349,6 +364,7 @@
                 return div;
             };
            
+            //adding legend to map
             legend.addTo(map);
         }
         
@@ -356,12 +372,16 @@
         // function to update the legend
         function updateLegend(breaks) {
              
+            //header for legend
             var legend = $('.legend').html("<h3>" + [attribute] + "</h3><ul>");
             
+            //looping through to get correct breaks and corresponding colors
             for (var i = 0; i < breaks.length-1; i++) {
                 
+                //referring to getColor function
                 var color = getColor(breaks[i], breaks);
                 
+                //append=populating legend
                 legend.append('<li><span style="background:' + color + '"></span> ' +
                             (breaks[i]).toLocaleString() + ' &mdash; ' +
                               (breaks[i+1]).toLocaleString() + "%" + '</li>');
@@ -373,13 +393,16 @@
         // function to create the range slider
         function createSliderUI(){
             
+            //creating leaflet control object
             var sliderControl = L.control({ position: 'bottomleft'} );
 
+            //actions for when control object is added to map
             sliderControl.onAdd = function(map) {
 
                     // select an existing DOM element with an id of "ui-controls"
                     var slider = L.DomUtil.get("ui-controls");
 
+                    //what happens when user slides across the control
                     L.DomEvent.addListener(slider, 'mousedown', function(e) { 
 
                     L.DomEvent.stopPropagation(e); 
@@ -389,10 +412,12 @@
             return slider;
         }
 
+        //adding slider control to map
         sliderControl.addTo(map);
         
         }
         
+        //function to draw the info panel....ISSUES RESIDE HERE
         function drawInfo() {
             
             //creating leafleft control object and positioning top-right
@@ -411,7 +436,7 @@
             
         }
         
-         //function to insert content into new info div element
+         //function to insert content into new info div element..ISSUES PROBABLY
         function updateInfo(layer) {
             //creating variable to save space and call attributes
             var props = layer.feature.properties;
@@ -425,8 +450,7 @@
             $(".info").html(html);
         }
         
-        
-        
+        //JQUERY for actions whenever the user uses the slider, then updates map
         $(".year-slider")
             .on('input change', function() {
                 attribute = $(this).val();
