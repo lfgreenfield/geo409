@@ -123,12 +123,10 @@
     <script>
         
         var options = {
-            center: [38.2, -94],
-            zoom: 4,
-            minZoom: 4,
-            maxZoom: 6,
-            dragging: true,
-            zoomControl: true
+            center: [37.6456, -84.7697],
+            zoom: 7,
+            dragging: false,
+            zoomControl: false
         }
         var map = L.map('map', options);
         
@@ -271,7 +269,7 @@
         // function to draw the legend
         function drawLegend() {
             
-            var legend = L.control({position: 'topleft'});
+            var legend = L.control({position: 'topright'});
             
             legend.onAdd = function(map) {
                 
