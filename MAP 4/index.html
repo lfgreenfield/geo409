@@ -176,13 +176,7 @@
 
                 var props = counties.features[county].properties;
 
-//                    console.log(props.COUNTY_FIP);
-                console.log(data);
-                console.log(data.data[d].CNTY);
-
                 for(var d in data.data) {
-
-//                    console.log(data.data[d].CNTY);
                     
                      if(props.COUNTY_FP == data.data[d].CNTY) {
                         counties.features[county].properties = data.data[d]; 
