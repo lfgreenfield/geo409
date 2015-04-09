@@ -154,15 +154,14 @@
                 header: true,
                 complete: function (data) {
                     
-                    //unemployment data is accessible here
-                    console.log(data);                 
+                        //unemployment data is accessible here
+                        console.log(data); 
+                        console.log(counties);
+                    
                     processData(counties, data);
                 }
             });
-            
-            //console.log(counties); THIS IS GEOMETRY/NAME PROPS
-            //counties is accessible here
-            
+
         })
         .fail(function() {
             //the data file fails to load
@@ -175,6 +174,7 @@
             for (var county in counties.features) {
 
                 var props = counties.features[county].properties;
+                
 
                 for(var d in data.data) {
                     
