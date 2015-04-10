@@ -332,7 +332,7 @@
              });
             
              //setting breaks...MAY BE PROBLEM HERE
-             var breaks = ss.jenks(values, 6);
+             var breaks = ss.jenks(values, 6); // note that ss.jenks behaves weird with small n
             
                 return breaks; // return Array of class breaks
             
@@ -343,22 +343,21 @@
          function getColor (d, breaks) {
                 
                 //different colors for the different breaks
-                if(d <= breaks[0]) {
+                // AP: not a big fan of the multi-hue scheme here. consider switching to single-hue
+                if(d <= breaks[1]) {
                     return '#c7e9b4';
-                } else if(d <= breaks[1]) {
-                    return '#7fcdbb';
                 } else if(d <= breaks[2]) {
-                    return '#41b6c4';
+                    return '#7fcdbb';
                 } else if(d <= breaks[3]) {
-                    return '#1d91c0'
+                    return '#41b6c4';
                 } else if(d <= breaks[4]) {
-                    return '#225ea8'
+                    return '#1d91c0'
                 } else if(d <= breaks[5]) {
-                    return '#0c2c84'
+                    return '#225ea8'
                 } else if(d <= breaks[6]) {
-                    return '#00001F'
+                    return '#0c2c84'
                 }
-            
+                // you had 7 colors for 6 classes
             }
         
                 
@@ -395,7 +394,7 @@
                //console.log(breaks);
                 
                 //referring to getColor function
-                var color = getColor(breaks[i], breaks);
+                var color = getColor(breaks[i+1], breaks);
                 
                 //append=populating legend
                 legend.append('<li><span style="background:' + color + '"></span> ' +
