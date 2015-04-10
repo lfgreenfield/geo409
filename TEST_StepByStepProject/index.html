@@ -94,25 +94,33 @@
         map.addLayer(tiles);
 
                                                                               
-//          var layerInfo = {
-//            gasLayer: {source: "Natural Gas", color: '#91cf60'}, 
-//            hydroLayer: {source:"Hydro", color:'#1f78b4'},    
-//            nuclearLayer: {source:"Nuclear", color:'#FFFF00'} 
-//        }                                          
+        var categoryLayers = {
+            abuseCounseling: {ServiceCat: "Abuse Counseling & Support"}, 
+            residentialSubstanceHelp: {ServiceCat:"Residential Substance Abuse Help"},    
+            outpatientSubstanceHelp: {ServiceCat:"Outpatient Substance Abuse Help"},
+            emergencyShelters: {ServiceCat: "Emergency Shelters"},
+            indigentHealthcare: {ServiceCat: "Indigent Healthcare"},
+            mentalHealthcare: {ServiceCat: "Mental Health Assessment/Counseling/Support"},
+            foodAssistance: {ServiceCat: "Food Assistance"},
+            housing: {ServiceCat: "Housing"},
+            pregnancyParenting: {ServiceCat: "Pregnancy and Parenting"},
+            education: {ServiceCat: "Education"}
+        }                                          
         
-         var geoJsonLayers = {};
-                                                  
+        var geoJsonLayers = {};
+        
+            console.log(serviceDatabase);                                                  
               
         for(var layer in serviceDatabase) {     
             geoJsonLayers[layer] = L.geoJson(serviceDatabase, {
                 pointToLayer: function(feature,latlng) {
                     return L.marker(latlng);
                 },
-//                filter: function(feature) {
-//                    if(feature.properties.fuel_source[layerInfo[layer].source]) {
-//                        return feature;
-//                    }
-//                },
+                filter: function(feature) {
+                    if(feature.properties.ServiceCat[categoryLayers[layer].cat]) {
+                        return feature;
+                    }
+                },
 ////                style: function(feature) {
 //                    return {
 //                        color: layerInfo[layer].color,
@@ -123,7 +131,9 @@
             }).addTo(map);
         }   
         
-//        console.log(geoJsonLayers[layer]);      
+            console.log(geoJsonLayers[layer]);
+        
+    
 //        
 //         map.on('click', function(e) {
 //             
