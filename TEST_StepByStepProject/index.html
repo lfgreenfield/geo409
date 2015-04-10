@@ -105,22 +105,28 @@
             housing: {ServiceCat: "Housing"},
             pregnancyParenting: {ServiceCat: "Pregnancy and Parenting"},
             education: {ServiceCat: "Education"}
-        }    
+        }   
+        
+        var commonStyles = {
+            weight: 1,
+            stroke: 1,
+            fillOpacity: .8
+        }
         
         var geoJsonLayers = {};
         
             console.log(serviceDatabase);                                                  
               
-        for(var layer in geoJsonLayers) {     
-            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {
+        for(var layer in serviceDatabase) {                       //4 loop goes through geoJson Layers to assign json to it
+            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
                 pointToLayer: function(feature,latlng) {
-                    return L.marker(latlng);
+                    return L.circleMarker(latlng, commonStyles);
                 },
-                filter: function(feature) {
-                    if(feature.properties.ServiceCat[categoryLayers[layer].ServiceCat]) {
-                        return feature;
-                    }
-                },
+//                filter: function(feature) {
+//                    if(feature.properties.ServiceCat[categoryLayers[layer].ServiceCat]) {
+//                        return feature;
+//                    }
+//                },
 ////                style: function(feature) {
 //                    return {
 //                        color: layerInfo[layer].color,
@@ -131,7 +137,6 @@
             }).addTo(map);
         }   
 //        
-//            console.log(geoJsonLayers[layer]);
         
     
 //        
