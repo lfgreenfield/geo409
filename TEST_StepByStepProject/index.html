@@ -94,18 +94,22 @@
         map.addLayer(tiles);
 
                                                                               
-        var categoryLayers = {
-            abuseCounseling: {ServiceCat: "Abuse Counseling & Support"}, 
-            residentialSubstanceHelp: {ServiceCat:"Residential Substance Abuse Help"},    
-            outpatientSubstanceHelp: {ServiceCat:"Outpatient Substance Abuse Help"},
-            emergencyShelters: {ServiceCat: "Emergency Shelters"},
-            indigentHealthcare: {ServiceCat: "Indigent Healthcare"},
-            mentalHealthcare: {ServiceCat: "Mental Health Assessment/Counseling/Support"},
-            foodAssistance: {ServiceCat: "Food Assistance"},
-            housing: {ServiceCat: "Housing"},
-            pregnancyParenting: {ServiceCat: "Pregnancy and Parenting"},
-            education: {ServiceCat: "Education"}
+        var layerInfo = {
+            abuseCounseling: {source: "Abuse Counseling & Support", color:'#1f78b4'}, 
+            residentialSubstanceHelp: {source:"Residential Substance Abuse Help", color:'#a6cee3'},    
+            outpatientSubstanceHelp: {source:"Outpatient Substance Abuse Help"},
+            emergencyShelters: {source: "Emergency Shelters"},
+            indigentHealthcare: {source: "Indigent Healthcare"},
+            mentalHealthcare: {source: "Mental Health Assessment/Counseling/Support"},
+            foodAssistance: {source: "Food Assistance"},
+            housing: {source: "Housing"},
+            pregnancyParenting: {source: "Pregnancy and Parenting"},
+            education: {source: "Education"}
         }   
+        
+        var geoJsonLayers = {};
+        
+        console.log(layerInfo); //objects and not layers??
         
         var commonStyles = {
             weight: 1,
@@ -113,29 +117,69 @@
             fillOpacity: .8
         }
         
-        var geoJsonLayers = {};
+//        console.log(serviceDatabase); 
         
-            console.log(serviceDatabase);                                                  
-              
-        for(var layer in serviceDatabase) {                       //4 loop goes through geoJson Layers to assign json to it
+        for(var layer in layerInfo) {                       //4 loop goes through geoJson Layers to assign json to it
             geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
                 pointToLayer: function(feature,latlng) {
-                    return L.circleMarker(latlng, commonStyles);
+                    return L.circleMarker(latlng);
                 },
-//                filter: function(feature) {
-//                    if(feature.properties.ServiceCat[categoryLayers[layer].ServiceCat]) {
+                onEachFeature: function(feature, layer) {
+                    
+                    var props = feature.properties;
+                    var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+                    var serviceCategory = props.ServiceCat;
+                
+                    layer.bindPopup(content);
+                }, 
+//                filter: function(feature, layer) {
+//                    if(feature.properties.ServiceNam[layerInfo[layer]].source){
 //                        return feature;
 //                    }
 //                },
-////                style: function(feature) {
+//                style: function(feature) {
 //                    return {
 //                        color: layerInfo[layer].color,
-//                        fillColor: layerInfo[layer].color,
-//                        radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
-//                    } 
-//                },            
+//                        fillColor: layerInfo[layer].color
+//                    }
+//                }
             }).addTo(map);
-        }   
+        }
+        
+        console.log(geoJsonLayers);
+        console.log(geoJsonLayers);
+                                          
+            
+//                filter: function(feature) {
+////                    
+//        L.geoJson(serviceDatabase, {
+//            pointToLayer: function(feature, latlng) {
+//                return L.marker(latlng);
+//            },
+//            onEachFeature: function(feature, layer) {
+//                var props = feature.properties;
+//                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+//                var serviceCategory = props.ServiceCat;
+//                
+//                
+//                layer.bindPopup(content);
+////              
+//                
+////                for(var layer in serviceCategory){
+////                    layer.bindPopup(content);
+////                }
+//            },
+//            filter: function(feature, layer) {
+//                
+//            console.log(feature.properties.ServiceNam[layerInfo[layer]]);
+//                if(feature.properties.ServiceNam[layerInfo[layer]].source);{
+//                    return feature;
+//                }
+//            }
+//        }).addTo(map);
+        
+//        console.log(geoJsonLayers.abuseCounseling.properties);
+    
 //        
         
     
