@@ -109,7 +109,7 @@
         
         var geoJsonLayers = {};
         
-        console.log(layerInfo); //objects and not layers??
+        console.log(layerInfo.abuseCounseling.color); //objects and not layers??
         
         var commonStyles = {
             weight: 1,
@@ -119,7 +119,7 @@
         
 //        console.log(serviceDatabase); 
         
-        for(var layer in layerInfo) {                       //4 loop goes through geoJson Layers to assign json to it
+        for(var layer in layerInfo) {                       
             geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
                 pointToLayer: function(feature,latlng) {
                     return L.circleMarker(latlng);
@@ -131,24 +131,30 @@
                     var serviceCategory = props.ServiceCat;
                 
                     layer.bindPopup(content);
-                }, 
+                    
+                }
+            }).addTo(map);
+            
+        }
+                                           
+    
 //                filter: function(feature, layer) {
-//                    if(feature.properties.ServiceNam[layerInfo[layer]].source){
+//                    
+//                    console.log(feature.properties); 
+//                    
+////                    if(feature.properties.ServiceNam["Abuse Counseling & Support"]){
 //                        return feature;
 //                    }
 //                },
 //                style: function(feature) {
+//                                                     
 //                    return {
-//                        color: layerInfo[layer].color,
+//                        color: layerInfo[layer].color, 
 //                        fillColor: layerInfo[layer].color
 //                    }
-//                }
-            }).addTo(map);
-        }
-        
-        console.log(geoJsonLayers);
-        console.log(geoJsonLayers);
-                                          
+//     
+            
+
             
 //                filter: function(feature) {
 ////                    
