@@ -97,19 +97,19 @@
         var layerInfo = {
             abuseCounseling: {source: "Abuse Counseling & Support", color:'#1f78b4'}, 
             residentialSubstanceHelp: {source:"Residential Substance Abuse Help", color:'#a6cee3'},    
-            outpatientSubstanceHelp: {source:"Outpatient Substance Abuse Help"},
-            emergencyShelters: {source: "Emergency Shelters"},
-            indigentHealthcare: {source: "Indigent Healthcare"},
-            mentalHealthcare: {source: "Mental Health Assessment/Counseling/Support"},
-            foodAssistance: {source: "Food Assistance"},
-            housing: {source: "Housing"},
-            pregnancyParenting: {source: "Pregnancy and Parenting"},
-            education: {source: "Education"}
+            outpatientSubstanceHelp: {source:"Outpatient Substance Abuse Help", color:'a6cee3' },
+            emergencyShelters: {source: "Emergency Shelters", color: 'a6cee3'},
+            indigentHealthcare: {source: "Indigent Healthcare", color: 'a6cee3'},
+            mentalHealthcare: {source: "Mental Health Assessment/Counseling/Support", color: 'a6cee3'},
+            foodAssistance: {source: "Food Assistance", color: 'a6cee3'},
+            housing: {source: "Housing", color: 'a6cee3'},
+            pregnancyParenting: {source: "Pregnancy and Parenting", color: 'a6cee3'},
+            education: {source: "Education", color: 'a6cee3'}
         }   
         
         var geoJsonLayers = {};
         
-        console.log(layerInfo.abuseCounseling.color); //objects and not layers??
+//        console.log(layerInfo.abuseCounseling.color); 
         
         var commonStyles = {
             weight: 1,
@@ -119,24 +119,65 @@
         
 //        console.log(serviceDatabase); 
         
-        for(var layer in layerInfo) {                       
-            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
-                pointToLayer: function(feature,latlng) {
-                    return L.circleMarker(latlng);
-                },
-                onEachFeature: function(feature, layer) {
-                    
-                    var props = feature.properties;
-                    var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
-                    var serviceCategory = props.ServiceCat;
-                
-                    layer.bindPopup(content);
-                    
-                }
-            }).addTo(map);
+        L.geoJson(serviceDatabase, {
             
-        }
-                                           
+            pointToLayer: function(feature, latlng) {
+                return L.marker(latlng);
+            },
+            onEachFeature: function(feature, layer) {
+                var props = feature.properties;
+                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+                layer.bindPopup(content);
+            },
+            filter: function(feature) {
+                if (feature.properties.ServiceNam["Adult Protection Services"]) {
+                    return feature;
+                }
+            }
+            
+        }).addTo(map);
+        
+//        for(var layer in layerInfo) {                       
+//            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
+//                pointToLayer: function(feature,latlng) {
+//                    return L.circleMarker(latlng);
+//                },
+//                onEachFeature: function(feature, layer) {
+//                    
+//                    var props = feature.properties;
+//                    var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+//                    var serviceCategory = props.ServiceCat;
+//                
+//                    layer.bindPopup(content);
+//                    
+//                    console.log(props.ServiceNam["Abuse Counseling and Support"]);
+//                    }
+//                    
+//                    
+//                    
+//                }
+//                filter: function(feature, layer) {
+//                    
+//                
+//                    if(feature.properties.ServiceNam == "Abuse Counseling & Support") {
+//                        return feature;
+//                    }
+//                
+//                },
+//                style: function(feature) {
+//                    
+//                    return {
+//                        color: layerInfo[layer].color,
+//                        fillColor: layerInfo[layer].color                       
+//                    }
+////                    
+////                }
+                                             
+//                
+//            }).addTo(map);
+//            
+//        }
+//                                           
     
 //                filter: function(feature, layer) {
 //                    
