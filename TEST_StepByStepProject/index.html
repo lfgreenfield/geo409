@@ -105,9 +105,21 @@
             housing: {source: "Housing", color: 'a6cee3'},
             pregnancyParenting: {source: "Pregnancy and Parenting", color: 'a6cee3'},
             education: {source: "Education", color: 'a6cee3'}
-        }   
+        } 
         
-        var geoJsonLayers = {};
+        var layerInfo2 = {
+            "Abuse Counseling and Support": {color: '#FF0000'},
+            "Residential Substance Abuse Help": {color: '#1f78b4'},
+            "Outpatient Substance Abuse Assessment/Treatment/Support": {color: '#006600'},
+            "Emergency Shelters": {color: '#993399'},
+            "Indigent Healthcare": {color: '#FFFF00'},
+            "Mental Health Assessment\/Counseling\/Support Groups": {color: '#FF6600'},
+            "Food Assistance": {color: '#000066'},
+            "Housing": {color: '#996633'},
+            "Pregnancy and Parenting": {color: '#800000'},
+            "Education": {color: '#FF0066'}            
+        }
+        
         
 //        console.log(layerInfo.abuseCounseling.color); 
         
@@ -119,188 +131,26 @@
         
 //        console.log(serviceDatabase); 
         
-        L.geoJson(serviceDatabase, {
+       var geoJsonLayers =  L.geoJson(serviceDatabase, {       
             
             pointToLayer: function(feature, latlng) {
-                return L.marker(latlng);
+                return L.circleMarker(latlng);
             },
             onEachFeature: function(feature, layer) {
                 var props = feature.properties;
                 var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+                
                 layer.bindPopup(content);
-            },
-//            filter: function(feature) {
-//                if (feature.properties.ServiceNam["Adult Protection Services"]) {
-//                    return feature;
-//                }
-//            }
+                
+                layer.setStyle({color: layerInfo2[props.ServiceCat].color});
+                
+            }
             
         }).addTo(map);
         
-//        for(var layer in layerInfo) {                       
-//            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {           
-//                pointToLayer: function(feature,latlng) {
-//                    return L.circleMarker(latlng);
-//                },
-//                onEachFeature: function(feature, layer) {
-//                    
-//                    var props = feature.properties;
-//                    var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
-//                    var serviceCategory = props.ServiceCat;
-//                
-//                    layer.bindPopup(content);
-//                    
-//                    console.log(props.ServiceNam["Abuse Counseling and Support"]);
-//                    }
-//                    
-//                    
-//                    
-//                }
-//                filter: function(feature, layer) {
-//                    
-//                
-//                    if(feature.properties.ServiceNam == "Abuse Counseling & Support") {
-//                        return feature;
-//                    }
-//                
-//                },
-//                style: function(feature) {
-//                    
-//                    return {
-//                        color: layerInfo[layer].color,
-//                        fillColor: layerInfo[layer].color                       
-//                    }
-////                    
-////                }
-                                             
-//                
-//            }).addTo(map);
-//            
-//        }
-//                                           
-    
-//                filter: function(feature, layer) {
-//                    
-//                    console.log(feature.properties); 
-//                    
-////                    if(feature.properties.ServiceNam["Abuse Counseling & Support"]){
-//                        return feature;
-//                    }
-//                },
-//                style: function(feature) {
-//                                                     
-//                    return {
-//                        color: layerInfo[layer].color, 
-//                        fillColor: layerInfo[layer].color
-//                    }
-//     
-            
-
-            
-//                filter: function(feature) {
-////                    
-//        L.geoJson(serviceDatabase, {
-//            pointToLayer: function(feature, latlng) {
-//                return L.marker(latlng);
-//            },
-//            onEachFeature: function(feature, layer) {
-//                var props = feature.properties;
-//                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
-//                var serviceCategory = props.ServiceCat;
-//                
-//                
-//                layer.bindPopup(content);
-////              
-//                
-////                for(var layer in serviceCategory){
-////                    layer.bindPopup(content);
-////                }
-//            },
-//            filter: function(feature, layer) {
-//                
-//            console.log(feature.properties.ServiceNam[layerInfo[layer]]);
-//                if(feature.properties.ServiceNam[layerInfo[layer]].source);{
-//                    return feature;
-//                }
-//            }
-//        }).addTo(map);
         
-//        console.log(geoJsonLayers.abuseCounseling.properties);
-    
-//        
-        
-    
-//        
-//         map.on('click', function(e) {
-//             
-//            for(var r in geoJsonLayers) {                
-////                    console.log(r);                
-//               geoJsonLayers[r].eachLayer(function (layer) {
-//                   
-//                    var props = layer.feature.properties;
-////                        console.log(props);//                   
-////                        console.log(layer.feature.geometry.coordinates);                   
-//                    var coords = L.latLng([layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]]);                   
-////                        console.log(e);//                 
-//                    var distance = e.latlng.distanceTo(coords)/1000;
-//                            if(distance > 500) {
-//                                layer.setStyle({
-//                                    stroke: false,
-//                                    fill: false
-//                            });
-//                            }
-//                            else {
-//                                layer.setStyle({
-//                                    stroke: true,
-//                                    fill: true
-//                            });
-//                            layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is                                  "+distance.toLocaleString()+" km</b><br> from the click point.");
-//                            };                                           
-//
-//               });
-//            }
-//         });
-//                                            
-//         map.on('dblclick', function(e) {
-//                            
-//             for(var r in geoJsonLayers) {
-//                 geoJsonLayers[r].eachLayer(function (layer) {
-//                     var props = layer.feature.properties;
-//                     var coords = L.latLng([layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]]);
-//                     var distance = e.latlng.distanceTo(coords)/1000; 
-//                        if(distance > 200) {
-//                            layer.setStyle({
-//                                stroke: false,
-//                                fill: false
-//                            });
-//                        }
-//                        else {
-//                            layer.setStyle ({
-//                                stroke: true,
-//                                fill: true
-//                            });
-//                           layer.bindPopup("<b>"+props.plant_name+"</b><br>"+props.capacity_mw.toLocaleString()+" MW<br><b>"+"<b>"+"This plant is                                  "+distance.toLocaleString()+" km</b><br> from the click point.");  
-//                        };
-//                 });
-//               }
-//             }); 
-//        
-//        map.doubleClickZoom.disable();
-//                           
-//
-//        function getRadius(val) {
-//             var radius = Math.sqrt(val/Math.PI);
-//             return radius;
-//         }
-//        
-//
-//        var sourcesLayers = {
-//        "<b style='color:#1f78b4'>Hydro</b>": geoJsonLayers.hydroLayer,
-//        "<b style='color:#91cf60'>Natural Gas</b>": geoJsonLayers.gasLayer,
-//        "<b style='color:#FFFF00; text-shadow: 0px 0px 1px #333;'>Nuclear</b>": geoJsonLayers.nuclearLayer
-//    }
-//
-//        L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
+                                           
+  
         
 
 </script>
