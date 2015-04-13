@@ -129,11 +129,11 @@
                 var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
                 layer.bindPopup(content);
             },
-            filter: function(feature) {
-                if (feature.properties.ServiceNam["Adult Protection Services"]) {
-                    return feature;
-                }
-            }
+//            filter: function(feature) {
+//                if (feature.properties.ServiceNam["Adult Protection Services"]) {
+//                    return feature;
+//                }
+//            }
             
         }).addTo(map);
         
