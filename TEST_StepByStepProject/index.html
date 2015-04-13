@@ -93,60 +93,100 @@
    
         map.addLayer(tiles);
 
-                                                                              
-        var layerInfo = {
-            abuseCounseling: {source: "Abuse Counseling & Support", color:'#1f78b4'}, 
-            residentialSubstanceHelp: {source:"Residential Substance Abuse Help", color:'#a6cee3'},    
-            outpatientSubstanceHelp: {source:"Outpatient Substance Abuse Help", color:'a6cee3' },
-            emergencyShelters: {source: "Emergency Shelters", color: 'a6cee3'},
-            indigentHealthcare: {source: "Indigent Healthcare", color: 'a6cee3'},
-            mentalHealthcare: {source: "Mental Health Assessment/Counseling/Support", color: 'a6cee3'},
-            foodAssistance: {source: "Food Assistance", color: 'a6cee3'},
-            housing: {source: "Housing", color: 'a6cee3'},
-            pregnancyParenting: {source: "Pregnancy and Parenting", color: 'a6cee3'},
-            education: {source: "Education", color: 'a6cee3'}
-        } 
-        
+                                                                                    
         var layerInfo2 = {
-            "Abuse Counseling and Support": {color: '#FF0000'},
-            "Residential Substance Abuse Help": {color: '#1f78b4'},
-            "Outpatient Substance Abuse Assessment/Treatment/Support": {color: '#006600'},
-            "Emergency Shelters": {color: '#993399'},
-            "Indigent Healthcare": {color: '#FFFF00'},
-            "Mental Health Assessment\/Counseling\/Support Groups": {color: '#FF6600'},
-            "Food Assistance": {color: '#000066'},
-            "Housing": {color: '#996633'},
-            "Pregnancy and Parenting": {color: '#800000'},
-            "Education": {color: '#FF0066'}            
+            abuseSupport: {name: "Abuse Counseling and Support", color: '#FF0000'},
+            residentialAbuseHelp: {name: "Residential Substance Abuse Help", color: '#1f78b4'},
+            outpatientAbuseHelp: {name: "Outpatient Substance Abuse Assessment/Treatment/Support", color: '#006600'},
+            emergencyShelters: {name: "Emergency Shelters", color: '#993399'},
+            indigentHealthcare: {name: "Indigent Healthcare", color: '#FFFF00'},
+            mentalHealth: {name: "Mental Health Assessment\/Counseling\/Support Groups", color: '#FF6600'},
+            food: {name: "Food Assistance", color: '#000066'},
+            housing: {name: "Housing", color: '#996633'},
+            pregnancy: {name: "Pregnancy and Parenting", color: '#800000'},
+            education: {name: "Education", color: '#FF0066'}            
         }
         
+        var geoJsonLayers = {};
         
-//        console.log(layerInfo.abuseCounseling.color); 
-        
-        var commonStyles = {
-            weight: 1,
-            stroke: 1,
-            fillOpacity: .8
-        }
-        
-//        console.log(serviceDatabase); 
-        
-       var geoJsonLayers =  L.geoJson(serviceDatabase, {       
+//        var commonStyles = {
+//            weight: 1,
+//            stroke: 1,
+//            fillOpacity: .8
+//        }
             
-            pointToLayer: function(feature, latlng) {
-                return L.circleMarker(latlng);
-            },
-            onEachFeature: function(feature, layer) {
-                var props = feature.properties;
-                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
-                
-                layer.bindPopup(content);
-                
-                layer.setStyle({color: layerInfo2[props.ServiceCat].color});
-                
-            }
+       for (var layer in layerInfo2) {
+           geoJsonLayers[layer] = L.geoJson(serviceDatabase, {       
             
-        }).addTo(map);
+                pointToLayer: function(feature, latlng) {
+                    return L.circleMarker(latlng);
+                },
+                filter: function(feature) {
+                   
+                    if (feature.properties.ServiceCat == layerInfo2[layer].name) {
+                        console.log("here");
+                        return feature;
+                    }
+                },
+                onEachFeature: function(feature, layer) {
+                    var props = feature.properties;
+                    var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+                
+                    layer.bindPopup(content);
+                    
+//                layer.setStyle({color: layerInfo2[layer].color});
+                
+                },
+                style: function(feature) {
+                    return {
+                        color: layerInfo2[layer].color,
+                        fillColor: layerInfo2[layer].color
+                    }
+                }
+            
+          }).addTo(map);           
+           
+       }
+        
+        console.log(geoJsonLayers);
+        
+//        var geoJsonLayers =  L.geoJson(serviceDatabase, {       
+//            
+//            pointToLayer: function(feature, latlng) {
+//                return L.circleMarker(latlng);
+//            },
+//            filter: function(feature) {
+//                if (feature.properties.ServiceCat[layerInfo2[layer].name]) {
+//                    return feature;
+//                }
+//            },
+//            onEachFeature: function(feature, layer) {
+//                var props = feature.properties;
+//                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
+//                
+//                layer.bindPopup(content);
+//                
+////                layer.setStyle({color: layerInfo2[props.ServiceCat].color});
+//                
+//            },
+//            style: function(feature) {
+//                return {
+//                    color: layerInfo2[layer].color,
+//                    fillColor: layerInfo2[layer].color
+//                }
+//            }
+//            
+//        }).addTo(map);      
+//        
+        console.log(geoJsonLayers.abuseSupport);
+       
+        var categoryLayers = {
+            "Abuse Counseling & Support": geoJsonLayers.abuseSupport
+          
+        }        
+        
+        L.control.layers(null, categoryLayers, {collapsed:false}).addTo(map);
+
         
         
                                            
