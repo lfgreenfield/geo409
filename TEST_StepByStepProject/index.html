@@ -124,7 +124,6 @@
                 filter: function(feature) {
                    
                     if (feature.properties.ServiceCat == layerInfo2[layer].name) {
-                        console.log("here");
                         return feature;
                     }
                 },
@@ -133,9 +132,7 @@
                     var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
                 
                     layer.bindPopup(content);
-                    
-//                layer.setStyle({color: layerInfo2[layer].color});
-                
+                                    
                 },
                 style: function(feature) {
                     return {
@@ -148,40 +145,18 @@
            
        }
         
-        console.log(geoJsonLayers);
-        
-//        var geoJsonLayers =  L.geoJson(serviceDatabase, {       
-//            
-//            pointToLayer: function(feature, latlng) {
-//                return L.circleMarker(latlng);
-//            },
-//            filter: function(feature) {
-//                if (feature.properties.ServiceCat[layerInfo2[layer].name]) {
-//                    return feature;
-//                }
-//            },
-//            onEachFeature: function(feature, layer) {
-//                var props = feature.properties;
-//                var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
-//                
-//                layer.bindPopup(content);
-//                
-////                layer.setStyle({color: layerInfo2[props.ServiceCat].color});
-//                
-//            },
-//            style: function(feature) {
-//                return {
-//                    color: layerInfo2[layer].color,
-//                    fillColor: layerInfo2[layer].color
-//                }
-//            }
-//            
-//        }).addTo(map);      
-//        
-        console.log(geoJsonLayers.abuseSupport);
        
         var categoryLayers = {
-            "Abuse Counseling & Support": geoJsonLayers.abuseSupport
+            "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
+            "Residential Substance Abuse Help": geoJsonLayers.residentialAbuseHelp,
+            "Outpatient Substance Abuse Assessment/Treatment/Support": geoJsonLayers.outpatientAbuseHelp,
+            "Emergency Shelters": geoJsonLayers.emergencyShelters,
+            "Indigent Healthcare": geoJsonLayers.indigentHealthcare,
+            "Mental Health Assessment/Counseling/Support Groups": geoJsonLayers.mentalHealth,
+            "Food Assistance": geoJsonLayers.food,
+            "Housing Services": geoJsonLayers.housing,
+            "Pregnancy and Parenting": geoJsonLayers.pregnancy,
+            "Education": geoJsonLayers.education
           
         }        
         
