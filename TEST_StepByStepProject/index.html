@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>US Electric Power Generation Map</title>
+    <title>Step-By-Step</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -18,21 +18,6 @@
             margin: 0;
             padding: 0;
             background: whitesmoke;
-            font-family: "Times New Roman", Times, serif;
-            color: #0D0000;
-        }
-        header {
-            padding: 6px 10%;
-        }
-        h1 {
-            display: inline-block;
-            margin-right: 20px;
-            color: #001323;
-            font-family: "Times New Roman", Times, serif;
-        }
-        h2 {
-            display: inline-block;
-            color: #001323;
         }
         #map {
             position: absolute;
@@ -40,25 +25,34 @@
             top: 0;
             bottom: 0;
         }
-        footer {
-            padding: 6px 10%;
-            width: 80%;
+        .leaflet-control-layers-expanded {
+            padding: 6px 8px;
+            color: 'black';
         }
-        p {
-            font-size: 1em;
-            color: #001323;
+        .leaflet-control-layers {
+            box-shadow: 0;
+            border-radius: 0px;
+            width: 370px;
         }
-         p.author-info {
-             font-style: italic;
-             text-align: right;
-             font-size: 0.9em;
-         }
+        leaflet-top .leaflet-control {
+            margin-top: 0;
+        }
+        leaflet-right. leaflet-control {
+            margin-right: 0;
+            float: none;
+        }
+        .leaflet-control {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            bottom: 0;
+            z-index: 7;
+            pointer-events: auto;
+        }
+     
         /* Additional style rules go here! */
         
-        .popup {
-            background: green; 
-            color: green;
-        }
+        
     </style>
 </head>
 
