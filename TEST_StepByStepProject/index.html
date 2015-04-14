@@ -7,9 +7,13 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/leaflet.awesome-markers.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+   
     
     <script src="TESTServiceDatabase.js"></script>
 
@@ -49,6 +53,8 @@
             z-index: 7;
             pointer-events: auto;
         }
+        _icon.style.backgroundColor {
+        }
      
         /* Additional style rules go here! */
         
@@ -86,6 +92,14 @@
         });
    
         map.addLayer(tiles);
+        
+       //insert sprite coffee icon stuff
+        
+        var redMarker = L.AwesomeMarkers.icon({
+            icon: 'coffee',
+            markerColor: 'red'
+            
+        });
 
                                                                                     
         var layerInfo2 = {
@@ -102,13 +116,13 @@
         }
         
         var geoJsonLayers = {};
-    
+        
             
-       for (var layer in layerInfo2) {
+        for (var layer in layerInfo2) {
            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {       
             
                 pointToLayer: function(feature, latlng) {
-                    return L.circleMarker(latlng);
+                    return L.marker(latlng, {icon: redMarker});
                 },
                 filter: function(feature) {
                    
