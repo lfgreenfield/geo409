@@ -102,12 +102,7 @@
         }
         
         var geoJsonLayers = {};
-        
-//        var commonStyles = {
-//            weight: 1,
-//            stroke: 1,
-//            fillOpacity: .8
-//        }
+    
             
        for (var layer in layerInfo2) {
            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {       
@@ -119,6 +114,7 @@
                    
                     if (feature.properties.ServiceCat == layerInfo2[layer].name) {
                         return feature;
+                        
                     }
                 },
                 onEachFeature: function(feature, layer) {
@@ -126,8 +122,12 @@
                     var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+"<br>";
                 
                     layer.bindPopup(content);
-                                    
-                },
+                    
+//                    layer.on('click', function () {
+//                                        
+//                        $.(".info").show();
+                        
+                    },       
                 style: function(feature) {
                     return {
                         color: layerInfo2[layer].color,
@@ -135,10 +135,10 @@
                     }
                 }
             
-          }).addTo(map);           
+          }).addTo(map); 
            
        }
-        
+
        
         var categoryLayers = {
             "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
