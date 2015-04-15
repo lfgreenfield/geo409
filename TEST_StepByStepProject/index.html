@@ -7,7 +7,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
- 
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -133,7 +133,12 @@
                 
                     layer.bindPopup(content);
                     
-//                  
+                    layer.on('click', function() {
+                        info.update(props);
+//                        info.onAdd(props);
+                       
+                        
+                    });
                         
                     },       
                 style: function(feature) {
@@ -147,25 +152,6 @@
            
        }
         
-       var info = L.control({
-            position: 'bottomright'
-       });
-        
-       info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-            this.update();
-            return this._div;
-       };
-        
-       info.update = function (props) {
-            this._div.innerHTML = '<h4>Attributes</h4>' +  (props ?
-            '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-            : 'Hover over a state');
-       };
-
-       info.addTo(map);     
-
-       
        var categoryLayers = {
             "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
             "Residential Substance Abuse Help": geoJsonLayers.residentialAbuseHelp,
@@ -181,6 +167,44 @@
         }        
         
         L.control.layers(null, categoryLayers, {collapsed:false}).addTo(map);
+        
+        var info = L.control();
+
+        info.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info');
+            
+           
+            return div;
+            
+
+//            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//            this.update();
+//            return this._div;
+        };
+
+       // method that we will use to update the control based on feature properties passed
+       info.update = function (props) {
+           console.log(props.ServiceNam);
+           
+//           var props = feature.properties
+           
+           var html = "<h3>"+"Service Name: "+"dfa"+"</h3>"+
+                    "Category: <b>"+ "dfdsadfas"+"</b><br>"+
+                    "Address: <b>"+ "dfadsf"+"</b><br>"+
+                    "Primary Phone: <b>"+"dfsadf"+"</b><br>"+
+                    "Website: <b>"+"dsfasdf"+"</b><br>"
+           
+              $(".info").html(html);
+               
+               
+//            this._div.innerHTML = "<h3>"+"Service Name: "+"dfa"+"</h3>"+
+//                    "Category: <b>"+ "dfdsadfas"+"</b><br>"+
+//                    "Address: <b>"+ "dfadsf"+"</b><br>"+
+//                    "Primary Phone: <b>"+"dfsadf"+"</b><br>"+
+//                    "Website: <b>"+"dsfasdf"+"</b><br>"
+       };
+
+       info.addTo(map);
 
         
         
