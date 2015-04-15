@@ -7,15 +7,11 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="js/leaflet.awesome-markers.js"></script>
+ 
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-       
+     
     <script src="TESTServiceDatabase.js"></script>
 
     <style>
@@ -54,8 +50,17 @@
             z-index: 7;
             pointer-events: auto;
         }
-        _icon.style.backgroundColor {
+        .info {
+            padding: 6px 8px;
+            font-size: 1em;
+            background: #fff;
+            box-shadow: 0;
+            border-radius: 0px;
+            text-align: left; 
+            height: 405px;
+            width: 370px;
         }
+        
      
         /* Additional style rules go here! */
         
@@ -93,13 +98,7 @@
         });
    
         map.addLayer(tiles);
-        
-        var redMarker = L.AwesomeMarkers.icon({
-            markerColor: 'red'
-            
-        });
-
-                                                                                    
+                                                                                 
         var layerInfo2 = {
             abuseSupport: {name: "Abuse Counseling and Support", color: '#FF0000'},
             residentialAbuseHelp: {name: "Residential Substance Abuse Help", color: '#1f78b4'},
@@ -113,14 +112,13 @@
             education: {name: "Education", color: '#FF0066'}            
         }
         
-        var geoJsonLayers = {};
-        
-            
+        var geoJsonLayers = {}; 
+               
         for (var layer in layerInfo2) {
            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {       
             
                 pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, {icon: redMarker});
+                    return L.circleMarker(latlng);
                 },
                 filter: function(feature) {
                    
@@ -135,9 +133,7 @@
                 
                     layer.bindPopup(content);
                     
-//                    layer.on('click', function () {
-//                                        
-//                        $.(".info").show();
+//                  
                         
                     },       
                 style: function(feature) {
@@ -150,9 +146,27 @@
           }).addTo(map); 
            
        }
+        
+       var info = L.control({
+            position: 'bottomright'
+       });
+        
+       info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+       };
+        
+       info.update = function (props) {
+            this._div.innerHTML = '<h4>Attributes</h4>' +  (props ?
+            '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+            : 'Hover over a state');
+       };
+
+       info.addTo(map);     
 
        
-        var categoryLayers = {
+       var categoryLayers = {
             "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
             "Residential Substance Abuse Help": geoJsonLayers.residentialAbuseHelp,
             "Outpatient Substance Abuse Assessment/Treatment/Support": geoJsonLayers.outpatientAbuseHelp,
