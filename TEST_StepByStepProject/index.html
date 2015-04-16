@@ -8,6 +8,7 @@
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
   
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -29,6 +30,7 @@
         .leaflet-control-layers-expanded {
             padding: 6px 8px;
             color: 'black';
+            background: #bfbfbf;
         }
         .leaflet-control-layers {
             box-shadow: 0;
@@ -53,7 +55,7 @@
         .info {
             padding: 6px 8px;
             font-size: 1em;
-            background: #fff;
+            background: #bfbfbf;
             box-shadow: 0;
             border-radius: 0px;
             text-align: left; 
@@ -69,18 +71,11 @@
 </head>
 
 <body>
-<!--
-    <header>
-        <h1>HEADER</h1>
-    </header>
--->
+    
+    <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/1.0.0-rc.4/esri-leaflet-geocoder.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/1.0.0-rc.4/esri-leaflet-geocoder.css">
 
     <div id='map'></div>
-
-    <footer>
-        <p class = 'author-info'>AUTHOR</p>
-        <p>TEXT</p>
-    </footer>
 
     <script>
         var options = {
@@ -190,6 +185,18 @@
        };
 
        info.addTo(map);
+        
+        
+    var searchControl = new L.esri.Geocoding.Controls.Geosearch().addTo(map);
+
+  var results = new L.LayerGroup().addTo(map);
+
+  searchControl.on('results', function(data){
+    results.clearLayers();
+    for (var i = data.results.length - 1; i >= 0; i--) {
+      results.addLayer(L.marker(data.results[i].latlng));
+    }
+  });
 
         
         
