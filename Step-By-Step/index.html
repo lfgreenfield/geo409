@@ -69,6 +69,8 @@
         }
         .logo {
             background-image: url('http://sbs.cornettims.com/wp-content/uploads/2013/01/sbs-logo-pink3-on-transparent-01.png');
+            height:400px;
+            width: 300px;
         }
     </style>
     
@@ -92,18 +94,22 @@
    
         map.addLayer(tiles); 
         
-        var logo = L.Control.extend({
-            options: {
-                position: 'bottomleft'
-            },
-            onAdd: function(map) {
-                var container  = L.DomUtil.create('div', 'logo');
-                    return container;
-                console.log("here");
-            }
-        });
+//        var logo = L.Control.extend({
+//            options: {
+//                position: 'bottomleft'
+//            }
+//        });        
+
+//        logo.onAdd = function(map) {
+//            var container  = L.DomUtil.create('div', 'logo');
+//                
+//            return container;
+//           
+//        }
+//        
+//        logo.addTo(map);
         
-        map.addControl(new logo());
+////      map.addControl(new logo());
         
         new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.Esri()
