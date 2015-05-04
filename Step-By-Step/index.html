@@ -67,6 +67,9 @@
             height: 405px;
             width: 370px;
         }
+        .logo {
+            background-image: url('http://sbs.cornettims.com/wp-content/uploads/2013/01/sbs-logo-pink3-on-transparent-01.png');
+        }
     </style>
     
 </head>
@@ -87,7 +90,20 @@
 	       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         });
    
-        map.addLayer(tiles);  
+        map.addLayer(tiles); 
+        
+        var logo = L.Control.extend({
+            options: {
+                position: 'bottomleft'
+            },
+            onAdd: function(map) {
+                var container  = L.DomUtil.create('div', 'logo');
+                    return container;
+                console.log("here");
+            }
+        });
+        
+        map.addControl(new logo());
         
         new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.Esri()
