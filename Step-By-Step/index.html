@@ -67,17 +67,11 @@
             height: 405px;
             width: 370px;
         }
-        
-     
-        /* Additional style rules go here! */
-        
-        
     </style>
+    
 </head>
 
-<body>
-    
-  
+<body>  
 
     <div id='map'></div>
 
@@ -88,25 +82,17 @@
         }
        
         var map = L.map('map', options);
-   
-//        var tiles = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
-//            attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
-//            subdomains: '0123',
-//            minZoom: 5,
-//            maxZoom: 18
-//        });
         
-       var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
 	       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-       });
+        });
    
         map.addLayer(tiles);  
         
-         new L.Control.GeoSearch({
+        new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.Esri()
         }).addTo(map);
-      
-                                                                                 
+                                                                                       
         var layerInfo2 = {
             abuseSupport: {name: "Abuse Counseling and Support", color: 'red'},
             residentialAbuseHelp: {name: "Residential Substance Abuse Help", color: 'blue'},
@@ -120,8 +106,7 @@
             education: {name: "Education", color: 'pink'},
             childcare: {name: "Childcare", color: 'beige'},
             employment: {name: "Employment", color: 'cadetblue'},
-            addtlResources: {name: "Additional Resources", color: 'lightgray'}
-                        
+            addtlResources: {name: "Additional Resources", color: 'lightgray'}        
         }
         
         var geoJsonLayers = {}; 
@@ -152,20 +137,14 @@
                     layer.bindPopup(content);
                     
                     layer.on('click', function() {
-                        info.update(props);
-//                        info.onAdd(props);
-                       
-                        
+                        info.update(props);                         
                     });
                         
                     },       
-
             
           }).addTo(map); 
            
-       }
-        
-       
+        }
         
         var categoryLayers = {
             "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
@@ -192,9 +171,8 @@
             var div = L.DomUtil.create('div', 'info');           
             return div;
         };
-
-       // method that we will use to update the control based on feature properties passed
-       info.update = function (props) {
+        
+        info.update = function (props) {
            
            var html = "<h3>"+props.ServiceNam+"</h3>"+
                     "Category: <b>"+props.ServiceCat+"</b><br>"+
@@ -205,26 +183,11 @@
            
            $(".info").html(html);
                
-       };
+        };
 
-       info.addTo(map);
-        
-//     var redMarker = L.AwesomeMarkers.icon({
-//            icon: 'coffee',
-//    markerColor: 'red'
-//  });
-
-//  L.marker([38.0297,-84.4947], {icon: redMarker}).addTo(map);
-        
-        
- 
-        
-        
-                                           
-  
-        
-
-</script>
+        info.addTo(map);
+                                    
+       </script>
     
 </body>
 
