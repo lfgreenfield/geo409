@@ -154,21 +154,23 @@
                     if (feature.properties.ServiceCat == layerInfo2[layer].name) {
                         return feature;
                         
-                        console.log("here");
+//                        console.log("here");
                         
                     }
                 },
                 onEachFeature: function(feature, layer) {
                     var props = feature.properties;
+                    
+                   
                     var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+" "+props.City+", "+props.State+" "+props.ZipCode+"<br>";
                 
                     layer.bindPopup(content);
                     
                     layer.on('click', function() {
+                        
                         info.update(props);                         
                     });
                     
-                        
                     },       
             
           }).addTo(map); 
@@ -179,8 +181,8 @@
 
         
         var categoryLayers = {
-            "<b style='color:#ca3b28'>Abuse Counseling & Support</b>":geoJsonLayers.abuseSupport,
-            "<b style='color:#37a7d9'>Residential Substance Abuse Help</b>":geoJsonLayers.residentialAbuseHelp,
+            "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
+            "Residential Substance Abuse Help": geoJsonLayers.residentialAbuseHelp,
             "Outpatient Substance Abuse Treatment/Support": geoJsonLayers.outpatientAbuseHelp,
             "Emergency Shelters": geoJsonLayers.emergencyShelters,
             "Indigent Healthcare": geoJsonLayers.indigentHealthcare,
@@ -188,7 +190,7 @@
             "Pregnancy and Parenting": geoJsonLayers.pregnancy,
             "Education": geoJsonLayers.education,
             "Childcare": geoJsonLayers.childcare,
-            "<b style='color:#406573'>Employment</b>":geoJsonLayers.employment,
+            "Employment": geoJsonLayers.employment,
             "Clothing, Food, Housing, Finance Aid": geoJsonLayers.clothfoodhouse,
             "Additional Resources": geoJsonLayers.addtlResources
           
@@ -213,6 +215,9 @@
                     "Website: <b>"+props.Website>+"</b><br>"
            
            $(".info").html(html);
+            
+            console.log("here");
+    
                
         };
 
