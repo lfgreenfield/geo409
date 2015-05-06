@@ -32,14 +32,14 @@
         h1 {
             position: absolute;
             z-index: 100;
-            bottom: 10px;
+            bottom: 15px;
             left: 30px;
-            right: 10px;
             padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
 /*            background: rgba(25,25,25,0.8);*/
-            border-radius: 5px;
-            width: 100px;
-            height: 50px;
+            border-radius: 5px
         }     
         #map {
             position: absolute;
@@ -76,7 +76,7 @@
             pointer-events: auto;
         }
         .info {
-            padding: 5px 8px;
+            padding: 6px 8px;
             font-size: 1em;
             background: #bfbfbf;
             box-shadow: 0;
@@ -97,7 +97,7 @@
 <body>  
 <!--    <image src ="images/lex-housing-landlords.PNG" alt="lex landlords map" class='project-image'>-->
     
-    <h1><image src ="SBSLogo.png" alt="LOGO" class='logo'></h1>
+    <h1><image src ="SBSLogo.png" alt="LOGO" class='logo'></image></h1>
 
     <div id='map'></div>
 
@@ -126,17 +126,16 @@
             emergencyShelters: {name: "Emergency Shelters", color: 'orange'},
             indigentHealthcare: {name: "Indigent Healthcare", color: 'lightgreen'},
             mentalHealth: {name: "Mental Health Assessment\/Counseling\/Support Groups", color: 'darkred'},
+            clothfoodhousing: {name: "Clothing, Food, Housing, Financial Aid", color: 'green'},
             pregnancy: {name: "Pregnancy and Parenting", color: 'darkpurple'},
             education: {name: "Education", color: 'pink'},
             childcare: {name: "Childcare", color: 'beige'},
             employment: {name: "Employment", color: 'cadetblue'},
-            clothfoodhouse: {name: "Clothing, Food, Housing, Financial Aid", color: 'green'},
-            addtlResources: {name: "Additional Resources", color: 'lightgray'},
-            
+            addtlResources: {name: "Additional Resources", color: 'lightgray'}        
         }
         
         var geoJsonLayers = {}; 
-        
+               
         for (var layer in layerInfo2) {
            geoJsonLayers[layer] = L.geoJson(serviceDatabase, {       
             
@@ -154,44 +153,36 @@
                     if (feature.properties.ServiceCat == layerInfo2[layer].name) {
                         return feature;
                         
-//                        console.log("here");
-                        
                     }
                 },
                 onEachFeature: function(feature, layer) {
                     var props = feature.properties;
-                    
-                   
                     var content = "<b>"+props.ServiceNam+"</b><br>"+props.Address+" "+props.City+", "+props.State+" "+props.ZipCode+"<br>";
                 
                     layer.bindPopup(content);
                     
                     layer.on('click', function() {
-                        
                         info.update(props);                         
                     });
-                    
+                        
                     },       
             
           }).addTo(map); 
            
         }
         
-//                "<b style='color:#1f78b4'>Hydro</b>": geoJsonLayers.hydroLayer,
-
-        
         var categoryLayers = {
             "Abuse Counseling & Support": geoJsonLayers.abuseSupport,
             "Residential Substance Abuse Help": geoJsonLayers.residentialAbuseHelp,
-            "Outpatient Substance Abuse Treatment/Support": geoJsonLayers.outpatientAbuseHelp,
+            "Outpatient Substance Abuse Treatment & Support": geoJsonLayers.outpatientAbuseHelp,
             "Emergency Shelters": geoJsonLayers.emergencyShelters,
             "Indigent Healthcare": geoJsonLayers.indigentHealthcare,
             "Mental Health Assessment/Counseling/Support Groups": geoJsonLayers.mentalHealth,
+            "Clothing, Food, Housing, Finance Aid": geoJsonLayers.clothfoodhousing,
             "Pregnancy and Parenting": geoJsonLayers.pregnancy,
             "Education": geoJsonLayers.education,
             "Childcare": geoJsonLayers.childcare,
             "Employment": geoJsonLayers.employment,
-            "Clothing, Food, Housing, Finance Aid": geoJsonLayers.clothfoodhouse,
             "Additional Resources": geoJsonLayers.addtlResources
           
         }        
@@ -199,7 +190,6 @@
         L.control.layers(null, categoryLayers, {collapsed:false}).addTo(map);
         
         var info = L.control();
-
         info.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info');           
             return div;
@@ -212,15 +202,11 @@
                     "Address: <b>"+props.Address+" "+props.City+", "+props.State+" "+props.ZipCode+"</b><br>"+
                     "Primary Phone: <b>"+props.PrimaryPho+"</b><br>"+
                     "Secondary Phone: <b>"+props.SecondaryP+"</b><br>"+
-                    "Website: <b>"+props.Website>+"</b><br>"
+                    "Website: <b>"+props.Website+"</b><br>"
            
            $(".info").html(html);
-            
-            console.log("here");
-    
                
         };
-
         info.addTo(map);
                                     
        </script>
