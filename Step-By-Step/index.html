@@ -32,6 +32,15 @@
             top: 0;
             bottom: 0;
         }
+          h1 {
+            display: inline;
+            background-image: url("SBSLogo.png"));
+            background-color: 'red';
+            position: absolute;;
+            z-value: 4;
+            margin-right: 20px;
+            
+        }
         .leaflet-control-layers-expanded {
             padding: 6px 8px;
             color: 'black';
@@ -72,6 +81,7 @@
             height:400px;
             width: 300px;
         }
+      
     </style>
     
 </head>
@@ -93,23 +103,6 @@
         });
    
         map.addLayer(tiles); 
-        
-//        var logo = L.Control.extend({
-//            options: {
-//                position: 'bottomleft'
-//            }
-//        });        
-
-//        logo.onAdd = function(map) {
-//            var container  = L.DomUtil.create('div', 'logo');
-//                
-//            return container;
-//           
-//        }
-//        
-//        logo.addTo(map);
-        
-////      map.addControl(new logo());
         
         new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.Esri()
