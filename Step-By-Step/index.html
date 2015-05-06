@@ -26,21 +26,27 @@
             padding: 0;
             background: whitesmoke;
         }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            position: absolute;
+            z-index: 100;
+            bottom: 10px;
+            left: 30px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: rgba(25,25,25,0.8);
+            border-radius: 5px
+        }     
         #map {
             position: absolute;
             width: 100%;
             top: 0;
             bottom: 0;
-        }
-          h1 {
-            display: inline;
-            background-image: url("SBSLogo.png"));
-            background-color: 'red';
-            position: absolute;;
-            z-value: 4;
-            margin-right: 20px;
-            
-        }
+        }      
         .leaflet-control-layers-expanded {
             padding: 6px 8px;
             color: 'black';
@@ -87,6 +93,8 @@
 </head>
 
 <body>  
+    
+    <h1>THIS IS A TEST</h1>
 
     <div id='map'></div>
 
